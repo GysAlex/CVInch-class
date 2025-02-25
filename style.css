@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*
+{
+    font-family: 'Poppins', 'Helvetica';
+}
+
+
+:root
+{
+    --gradient:  linear-gradient(to right, #001f3f, #003366); 
+    --form-bg: #E8F5E9;
+}
+
+body
+{
+    background-image: var(--gradient);
+}
+
+#cv
+{
+    background-color: rgba(255, 255, 255, .9);
+    backdrop-filter: blur(5px);
+}
+
+
+#cv-container
+{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+}
+
+
+
+/* Style pour la barre de défilement (Webkit - Chrome, Safari) */
+#try::-webkit-scrollbar {
+    width: 6px; /* Largeur de la barre */
+}
+
+#try::-webkit-scrollbar-track {
+    background: #333; /* Couleur de fond de la barre */
+    border-radius: 50px;
+}
+
+#try::-webkit-scrollbar-thumb {
+    background-color: orange; /* Couleur de l'indicateur */
+    border-radius: 3px; /* Bordures arrondies */
+
+}
+
+/* Style pour la barre de défilement (Firefox) */
+#try {
+    scrollbar-width: thin; /* Épaisseur de la barre */
+    scrollbar-color: rgb(1, 1, 37) white; /* Couleur de l'indicateur et du fond */
+}
+
+
+#try
+{
+    background-color: rgba(0, 0, 0, 0.274);
+    backdrop-filter: blur(6px);
+}
+
+i
+{
+    font-size: .9em;
+    width: 15px;
+}
+
+.l-item .title, .person-info .name, .other .title
+{
+    position: relative;
+}
+
+.l-item .title::before, .person-info .name::before, .other .title::before
+{
+    position: absolute;
+    content: '';
+    width: 30%;
+    height: 2px;
+    background-color: white;
+    bottom: 0;
+}
+
+.person-info .post
+{
+    letter-spacing: 4px;
+}
+
+.person-info .name::before, .other .title::before
+{
+    width: 20%;
+    background-color: #1C398E;
+}
+
+.person-info .description
+{
+    color: #1C398E;
+    font-family: .9em;
+    line-height: 18px;
+}
+
+.experiences .desc
+{
+    font-size: .6em;
+}
+
+.special
+{
+    font-weight: 500;
+    color: #1C398E;
+    text-transform: capitalize;
+}
+
+img
+{
+    width: 150px;
+    height: 150px;
+    border: solid 5px white;
+}

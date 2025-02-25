@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre Nom - CV</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.0/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container mx-auto flex flex-wrap h-screen">
+
+        <div class="w-1/2  p-8 ">
+            <h2 class="text-2xl font-bold mb-4 text-white">Formulaire de CV</h2>
+            <form id="cvForm" class="form-container min-h-[200px] w-full bg-white rounded-2xl pb-2 flex flex-col items-end " >
+                <div id="formContact" class="p-5 self-start w-full">
+                    <div class="title text-blue-900 text-xl my-5 font-bold">Contact</div>
+                    <div class="content flex flex-col gap-4 w-full ">
+                        <div class="el flex items-center gap-6">
+                            <label for="phone-number" class="" style="width: 110px;">Téléphone</label>
+                            <input type="text" pattern="[0-9]{10}" placeholder="+(1) 123456789" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                        </div>
+                        <div class="el flex items-center gap-6 " >
+                            <label for="email" class="" style="width: 110px;" >Email</label>
+                            <input type="email" placeholder="john@doe.com" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%; ">
+                        </div>
+                        <div class="el flex items-center gap-6">
+                            <label for="address" class="" style="width: 110px;">Adresse</label>
+                            <input type="text" placeholder="City, Country" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                        </div>
+                    </div>
+                </div>
+                <div id="personnalInfo " class="self-start p-5 hidden w-full" >
+                    <div class="title text-blue-900 text-xl my-5 font-bold">Informations Personnelles</div>
+                    <div class="content flex flex-col gap-4 w-full">
+                        <div class="el flex items-center gap-6">
+                            <label for="post" class="" style="width: 115px;">Poste</label>
+                            <input type="text" pattern="" placeholder="Ingenieur Réseaux" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                        </div>
+                        <div class="el flex items-center gap-6" >
+                            <label for="fullname" class="" style="width: 115px;" >Nom complet</label>
+                            <input type="text" placeholder="john doe" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                        </div>
+                        <div class="el flex items-center gap-6">
+                            <label for="address" class="" style="width: 115px;">Description</label>
+                            <textarea name="description" id=""  class="p-3 rounded-xl border border-blue-900" style="outline: transparent; width: 100%; resize: none;"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation flex items-center  justify-end  gap-4 pe-3" style="width: 80%;">
+                    <button type="button" class="bg-blue-500 p-2 rounded-2xl" style="width: 90px;">previous</button>
+                    <button type="button" class="bg-blue-500 p-2 rounded-2xl mx-4" style="width: 90px;">next</button>
+                </div>
+    
+            </form>
+        </div>
+
+        <div class="w-1/2 p-5 overflow-y-auto h-full" id="try"  >
+            <div  class="flex flex-row " id="cv-container">
+                <div class="left-side flex flex-col bg-blue-900" >
+                    <div class="left-item p-5 py-4">
+                        <img src="image/team1.jpg" alt="" class= "rounded-full">
+                    </div>
+                    
+                    <div class="l-item p-4 flex gap-4 flex-col">
+                        <div class="title text-white py-1">
+                            Contacts
+                        </div>
+                        <div class="info flex flex-col gap-2">
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fa-phone text-white"></i><span class="text-xs text-white tracking-widest">(+237)123567890</span>
+                            </div>
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fa-envelope text-white"></i><span class="text-xs text-white tracking-widest">youremail@domain.com</span>
+                            </div>
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fa-map-marker-alt text-white"></i><span class="text-xs text-white tracking-widest">Douala, Cameroun</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="l-item p-4 flex gap-4 flex-col">
+                        <div class="title text-white py-1">
+                            Compétences
+                        </div>
+                        <div class="info">
+                            <div class="info flex flex-col gap-2">
+                                <div class="i-element flex items-center gap-2">
+                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Compétence 1</span>
+                                </div>
+                                <div class="i-element flex items-center gap-2">
+                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Competence 2 </span>
+                                </div>
+                                <div class="i-element flex items-center gap-2">
+                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Compétence 3 </span>
+                                </div>
+                                <div class="i-element flex items-center gap-2">
+                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Competence 4 </span>
+                                </div>
+                                <div class="i-element flex items-center gap-2">
+                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Compétence 5</span>
+                                </div>
+                                <div class="i-element flex items-center gap-2">
+                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Competence 6 </span>
+                                </div>
+                                <div class="i-element flex items-center gap-2">
+                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Compétence 7 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="l-item p-4 flex gap-4 flex-col">
+                        <div class="title  text-white py-1">
+                            Langues
+                        </div>
+                        <div class="info flex flex-col gap-2">
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">langue 1 (niveau)</span>
+                            </div>
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">langue 2 (niveau)</span>
+                            </div>
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">langue 3 (niveau)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="l-item p-4 flex gap-4 flex-col">
+                        <div class="title  text-white py-1">
+                            Loisirs
+                        </div>
+                        <div class="info flex flex-col gap-2">
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">loisir 1 </span>
+                            </div>
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">loisir 2</span>
+                            </div>
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">loisir 3</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="l-item p-4 flex gap-4 flex-col">
+                        <div class="title text-xl text-white py-1">
+                            Références
+                        </div>
+                        <div class="info flex flex-col gap-2">
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Références 1 </span>
+                            </div>
+                            <div class="i-element flex items-center gap-2">
+                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Références 2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-side bg-white flex flex-col">
+                    <div class="person-info bg-blue-300 p-4 flex flex-col gap-2" >
+                        <div class="post uppercase text-white tracking-wider">
+                            Ingénieur réseaux
+                        </div>
+                        <div class="name uppercase text-2xl text-blue-900 py-1">
+                            Votre Nom Complet
+                        </div>
+                        <div class="description text-xs mt-2.5">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste doloribus eligendi repudiandae repellendus accusantium reprehenderit modi dignissimos porro in omnis et sit quibusdam rerum id, natus eaque quia. Pariatur, eaque. rerum id, natus eaque quia. Pariatur, eaque.
+                        </div>
+                    </div>
+    
+                    <div class="other p-4">
+                        <div class="flex flex-col gap-2" id="experiences">
+                            <div class="title text font-medium text-blue-900 py-1">
+                                Expériences professionnelles
+                            </div>
+                            <div class="exp-container flex flex-col gap-3">
+                                <div class="exp-item flex gap-1 flex-col">
+                                    <div class="job-name text-sm">
+                                        Technicien réseau à <span class="special">camtel</span>
+                                    </div>
+                                    <div class="range flex text-xs font-medium gap-1">
+                                        <div class="start-date">Avril 2023</div>
+                                        <div>à</div>
+                                        <div class="end-date"> Present </div>
+                                    </div>
+                                    <div class="desc text-xs font-light">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus rem dicta totam maxime consequuntur. Vitae assumenda cum placeat dolore ex, corru
+                                    </div>
+                                </div>
+                                <div class="exp-item flex gap-1 flex-col">
+                                    <div class="job-name text-sm">
+                                        Technicien réseau à <span class="special">Gosat</span>
+                                    </div>
+                                    <div class="range flex text-xs font-medium gap-1">
+                                        <div class="start-date">Mars 2022</div>
+                                        <div>à</div>
+                                        <div class="end-date"> Decembre 2022 </div>
+                                    </div>
+                                    <div class="desc text-xs font-light">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus rem dicta totam maxime consequuntur. Vitae assumenda cum placeat dolore ex, corrupti aspernatur alias voluptate quos quod neque blanditiis voluptas! Ad.
+                                    </div>
+                                </div>
+                                <div class="exp-item flex gap-1 flex-col">
+                                    <div class="job-name text-sm">
+                                        Technicien réseau à <span class="special">camtel</span>
+                                    </div>
+                                    <div class="range flex text-xs font-medium gap-1">
+                                        <div class="start-date">Octobre 2021</div>
+                                        <div>à</div>
+                                        <div class="end-date"> Mars 2022 </div>
+                                    </div>
+                                    <div class="desc text-xs font-light">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="formation" class="mt-4 flex flex-col gap-2">
+                            <div class="title text font-medium text-blue-900 py-1 ">
+                                Formation Académique
+                            </div>
+                            <div class="edu-container flex flex-col gap-3" >
+                                <div class="edu-item flex gap-1 flex-col">
+                                    <div class="range flex text-xs font-medium gap-1">
+                                        <div class="start-date">Avril 2023</div>
+                                        <div>à</div>
+                                        <div class="end-date"> Mai 2023 </div>
+                                    </div>
+                                    <div class="university-name text-sm font-light">
+                                        IUT de Douala
+                                    </div>
+                                    <div class="desc text-xs  text-blue-900">
+                                        Licence Technologique en Sécurité des Réseaux
+                                    </div>
+                                </div>
+                                <div class="edu-item flex gap-1 flex-col">
+                                    <div class="range flex text-xs font-medium gap-1">
+                                        <div class="start-date">Avril 2023</div>
+                                        <div>à</div>
+                                        <div class="end-date"> Mai 2023 </div>
+                                    </div>
+                                    <div class="university-name text-sm font-light">
+                                        IUT de Douala
+                                    </div>
+                                    <div class="desc text-xs text-blue-900">
+                                        DUT en Télécommunications et Réseaux 
+                                    </div>
+                                </div>
+                                <div class="edu-item flex gap-1 flex-col">
+                                    <div class="range flex text-xs font-medium gap-1">
+                                        <div class="start-date">Avril 2023</div>
+                                        <div>à</div>
+                                        <div class="end-date"> Mai 2023 </div>
+                                    </div>
+                                    <div class="university-name text-sm font-light">
+                                        Lycée Bilingue de Douala
+                                    </div>
+                                    <div class="desc text-xs  text-blue-900">
+                                        BACC (Baccalauréat D)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
