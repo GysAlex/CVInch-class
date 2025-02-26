@@ -1,11 +1,14 @@
-function ShowLimitError(message) 
-{
-    document.getElementById('limitSkill').innerText = message
-
-    setTimeout(() => {
-        document.getElementById('limitSkill').innerText = ""
-    }, 4000);
+// Universal ShowLimitError function
+function ShowLimitError(message, elementId) {
+    let element = document.getElementById(elementId);
+    if (element) {
+        element.innerText = message;
+        setTimeout(() => {
+            element.innerText = "";
+        }, 3000);
+    }
 }
+
 
 function switcher() 
 {    
@@ -49,71 +52,227 @@ function switcher()
     })
 }
 
-function removeSkill(e)
-{
-    if(Array.from(document.querySelectorAll('#skills .content > div')).length > 1 )
-    {
-        e.target.parentElement.parentElement.remove()
-        const sk = new CustomEvent('skill_deleted', {
-            detail: {
-                "index" : e
-            }
-        })
-        document.querySelector("#skills").dispatchEvent(sk) //This is very intersting...
-    }
-
-    else
-        ShowLimitError("Trop peu de compétences !")
-
-}
-
-
-function skillsFormHandler()
-{
-    let indexer = 0
-    let el = document.querySelector('#skills .content > div') 
-
-    function reOrder() 
-    {
-        let skillsItems = document.querySelectorAll("#skills .content > div")
-        skillsItems.forEach((el, i)=>{
-            el.firstElementChild.firstElementChild.innerText = (i + 1)
-        })
-    }
-
-    function addSkill() 
-    {
-        if(indexer <= 5 )
-        {
-            let el = document.querySelector('#skills .content > div')   
-        
-            let newElement = el.cloneNode(true)
+// Remove Skill function
+function removeSkill(e) {
+    let skillItems = document.querySelectorAll('#skills .content > div');
     
-            document.querySelector('#skills .content').appendChild(newElement)  
-
-            indexer++
-            reOrder()
-        }
-
-        else
-        {
-            ShowLimitError("Maximun de compétences atteint !")
-        }
-
+    // Ensure there is more than one skill to delete
+    if (skillItems.length > 1) {
+        e.target.closest('div').remove();
+        reOrderSkills();  // Reorder after deletion
+    } else {
+        ShowLimitError("Trop peu de compétences !");
     }
+}
 
-    document.querySelector('#skills').addEventListener('skill_deleted', (e)=>{
-        indexer--
-        reOrder()
-    })
-
-    document.getElementById("addSkills").addEventListener('click', ()=>{
-        addSkill()
-    })
-
+// Reorder Skills after adding/removing items
+function reOrderSkills() {
+    document.querySelectorAll('#skills .content > div').forEach((el, i) => {
+        // Update the skill index (comId)
+        el.querySelector('.comId').innerText = (i + 1);
+    });
 }
 
 
+// Add Skill Function 
+function addSkill() {
+    let skillItems = document.querySelectorAll('#skills .content > div');
 
-skillsFormHandler()
-switcher()
+    if (skillItems.length < 7) {
+        let newElement = skillItems[0].cloneNode(true);
+        newElement.querySelectorAll('input').forEach(input => input.value = "");
+        newElement.querySelector('.delete-btn').addEventListener('click', removeSkill);
+        document.querySelector('#skills .content').appendChild(newElement);
+        reOrderSkills();
+    } else {
+        ShowLimitError("Maximum de compétences atteint !", );
+    }
+}
+// Initialize Skills Form Handler
+function skillsFormHandler() {
+    // Attach event listener to Add Skill button
+    document.getElementById("addSkills").addEventListener('click', addSkill);
+
+    // Attach event listener to existing delete buttons (if any)
+    document.querySelectorAll('#skills .content > div button').forEach(button => {
+        button.addEventListener('click', removeSkill);
+    });
+}
+
+
+// Language Section Functions
+
+function ShowLimitError(message) 
+{
+    document.getElementById('limitLanguage').innerText = message
+
+    setTimeout(() => {
+        document.getElementById('limitLanguage').innerText = ""
+    }, 4000);
+}
+
+// Remove Language Function 
+function removeLanguage(e) {
+    let languageItems = document.querySelectorAll('#language .content > div');
+
+    if (languageItems.length > 1) {
+        e.target.closest('div').remove();
+        reOrderLanguages();
+    } else {
+        ShowLimitError("Trop peu de langues !");
+    }
+}
+
+
+    let languageItems = document.querySelectorAll('#language .content > div');
+    if (languageItems.length > 1) {
+        e.target.closest('div').remove();
+        const languageDeletedEvent = new CustomEvent('language_deleted');
+        document.querySelector("#language").dispatchEvent(languageDeletedEvent);
+    } else {
+        ShowLimitError("Trop peu de langues !");
+    }
+
+
+function languageFormHandler() {
+    let languageItems = document.querySelectorAll("#language .content > div");
+    let indexer = languageItems.length;
+
+    function reOrder() {
+        document.querySelectorAll("#language .content > div").forEach((el, i) => {
+            el.querySelector('.comId').innerText = (i + 1);
+        });
+    }
+
+    function addLanguage() {
+        let languageItems = document.querySelectorAll('#language .content > div');
+    
+        if (languageItems.length < 4) {
+            let newElement = languageItems[0].cloneNode(true);
+            newElement.querySelectorAll('input').forEach(input => input.value = "");
+            newElement.querySelector('.delete-btn').addEventListener("click", removeLanguage);
+            document.querySelector('#language .content').appendChild(newElement);
+            reOrderLanguages();
+        } else {
+            ShowLimitError("Maximum de langues atteint !");
+        }
+    }
+
+ 
+
+    document.querySelector('#language').addEventListener('language_deleted', () => {
+        indexer--;
+        reOrder();
+    });
+
+    document.getElementById("addlanguage").addEventListener('click', addLanguage);
+}
+
+// Hobby Section Functions
+
+function ShowLimitError(message) 
+{
+    document.getElementById('limithobby').innerText = message
+
+    setTimeout(() => {
+        document.getElementById('limithobby').innerText = ""
+    }, 4000);
+}
+
+
+// Remove Hobby Function (Fixed)
+function removeHobby(e) {
+    let hobbyItems = document.querySelectorAll('#hobby .content > div');
+
+    if (hobbyItems.length > 1) {
+        e.target.closest('div').remove();
+        reOrderHobbies();
+    } else {
+        ShowLimitError("Trop peu de loisirs !", "limitHobby");
+    }
+}
+
+
+function hobbyFormHandler() {
+    let hobbyItems = document.querySelectorAll("#hobby .content > div");
+    let indexer = hobbyItems.length;
+
+    function reOrder() {
+        document.querySelectorAll("#hobby .content > div").forEach((el, i) => {
+            el.querySelector('.comId').innerText = (i + 1);
+        });
+    }
+
+    
+    // Add Hobby Function (Fixed)
+function addHobby() {
+    let hobbyItems = document.querySelectorAll('#hobby .content > div');
+
+    if (hobbyItems.length < 3) {
+        let newElement = hobbyItems[0].cloneNode(true);
+        newElement.querySelectorAll('input').forEach(input => input.value = "");
+        newElement.querySelector('.delete-btn').addEventListener("click", removeHobby);
+        document.querySelector('#hobby .content').appendChild(newElement);
+        reOrderHobbies();
+    } else {
+        ShowLimitError("Maximum de loisirs atteint !", "limitHobby");
+    }
+}
+
+    document.querySelector('#hobby').addEventListener('hobby_deleted', () => {
+        indexer--;
+        reOrder();
+    });
+
+    document.getElementById("addhobby").addEventListener('click', addHobby);
+}
+
+
+// REFERENCES SECTION (NEW FEATURE)
+function removeReference(e) {
+    let referenceItems = document.querySelectorAll('#references .content > div');
+
+    if (referenceItems.length > 1) {
+        e.target.closest('div').remove();
+        reOrderReferences();
+    } else {
+        ShowLimitError("Vous devez avoir au moins une référence !", "limitReference");
+    }
+}
+
+// Reorder References
+function reOrderReferences() {
+    document.querySelectorAll("#references .content > div").forEach((el, i) => {
+        el.querySelector('.comId').innerText = (i + 1);
+    });
+}
+
+// Add Reference
+function addReference() {
+    let referenceItems = document.querySelectorAll('#references .content > div');
+
+    if (referenceItems.length < 5) {
+        let newElement = referenceItems[0].cloneNode(true);
+        newElement.querySelectorAll('input').forEach(input => input.value = "");
+        newElement.querySelector('.delete-btn').addEventListener("click", removeReference);
+        document.querySelector('#references .content').appendChild(newElement);
+        reOrderReferences();
+    } else {
+        ShowLimitError("Maximum de références atteint !", "limitReference");
+    }
+}
+
+// Initialize References Section
+function referenceFormHandler() {
+    document.getElementById("addreference").addEventListener('click', addReference);
+    document.querySelectorAll('#references .content > div .delete-btn').forEach(button => {
+        button.addEventListener('click', removeReference);
+    });
+}
+
+// Initialize All Sections
+skillsFormHandler();
+languageFormHandler();
+hobbyFormHandler();
+referenceFormHandler();
+switcher();
