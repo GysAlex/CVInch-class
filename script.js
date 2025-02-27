@@ -216,7 +216,7 @@ function removeSkill(e)
 }
 */
 
-/*
+
 function skillsFormHandler()
 {
     let indexer = 0
