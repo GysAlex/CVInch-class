@@ -77,6 +77,56 @@
                     </div>
                 </div>
 
+                <!--language section-->
+                <div id="language" class="self-start p-5 hide w-full">
+                    <div class="title my-5 flex items-center justify-between">
+                        <span class="text-blue-900 text-xl font-bold">langue(s)</span> 
+                        <span class="text-xs text-red-600" id="limitLanguage"></span>
+                        <button type="button" id="addlanguage" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
+                            <span class="text-blue-900 font-medium">+</span>
+                            <span class="text-blue-900 font-medium">ajouter</span>
+                        </button>
+                    </div>
+                    <div class="content flex flex-col gap-4 w-full">
+                        <div class="el flex items-center gap-6">
+                            <label class="flex gap-1" style="width: 110px;">Langue <span class="comId">1</span></label>
+                            <input type="text" name="language[]" placeholder="français" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                            <div class="language-group">
+                                <select name="language_level[]" class="w-full p-2 border rounded">
+                                    <option value="Débutant">Débutant</option>
+                                    <option value="Intermédiaire">Intermédiaire</option>
+                                    <option value="Avancé">Avancé</option>
+                                    <option value="Courant">Courant</option>
+                                </select>
+                            </div>
+                            <button type="button" class="delete-btn">
+                                <i class="fa-solid fa-x text-xl font-bold text-red-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--hobby section-->
+                <div id="hobby" class="self-start p-5 hide w-full">
+                    <div class="title my-5 flex items-center justify-between">
+                        <span class="text-blue-900 text-xl font-bold">Loisirs</span>
+                        <span class="text-xs text-red-600" id="limithobby"></span>
+                        <button type="button" id="addhobby" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
+                            <span class="text-blue-900 font-medium">+</span>
+                            <span class="text-blue-900 font-medium">ajouter</span>
+                        </button>
+                    </div>
+                    <div class="content flex flex-col gap-4 w-full">
+                        <div class="el flex items-center gap-6">
+                            <label class="flex gap-1" style="width: 110px;">Loisir <span class="comId">1</span></label>
+                            <input type="text" name="hobby[]" placeholder="talent" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                            <button type="button" class="delete-btn">
+                                <i class="fa-solid fa-x text-xl font-bold text-red-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <!--Reffernces section-->
                 <div id="reference" class="self-start hide p-5 w-full">
                                                     <div class="title my-5 flex items-center justify-between">
