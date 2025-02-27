@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votre Nom - CV</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+     <!-- <link rel="stylesheet" href="output.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 
 <body>
@@ -19,25 +21,9 @@
 
         <div class="w-1/2  p-8 ">
             <h2 class="text-2xl font-bold mb-4 text-white">Formulaire de CV</h2>
-            <form id="cvForm" class="form-container min-h-[200px] w-full bg-white rounded-2xl pb-2 flex flex-col items-end " >
-                <div id="formContact" class="p-5 self-start w-full">
-                    <div class="title text-blue-900 text-xl my-5 font-bold">Contact</div>
-                    <div class="content flex flex-col gap-4 w-full ">
-                        <div class="el flex items-center gap-6">
-                            <label for="phone-number" class="" style="width: 110px;">Téléphone</label>
-                            <input type="text" pattern="[0-9]{10}" placeholder="+(1) 123456789" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                        </div>
-                        <div class="el flex items-center gap-6 " >
-                            <label for="email" class="" style="width: 110px;" >Email</label>
-                            <input type="email" placeholder="john@doe.com" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%; ">
-                        </div>
-                        <div class="el flex items-center gap-6">
-                            <label for="address" class="" style="width: 110px;">Adresse</label>
-                            <input type="text" placeholder="City, Country" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                        </div>
-                    </div>
-                </div>
-                <div id="personnalInfo " class="self-start p-5 hidden w-full" >
+            <form id="cvForm" class="form-container h-[400px] w-full relative bg-white rounded-2xl pb-2 flex flex-col items-end " >
+                
+                <div id="personnalInfo " class="self-start absolute p-5 w-full"  >
                     <div class="title text-blue-900 text-xl my-5 font-bold">Informations Personnelles</div>
                     <div class="content flex flex-col gap-4 w-full">
                         <div class="el flex items-center gap-6">

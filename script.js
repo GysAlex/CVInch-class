@@ -7,6 +7,39 @@ function ShowLimitError(message)
     }, 4000);
 }
 
+
+function formAjust(currentIndex) 
+{
+    if(currentIndex == 2)
+    {
+        if(hajust)
+        {
+            document.querySelector('form').style.height = `${hajust}px`
+        }
+        else
+        {
+            document.querySelector('form').style.height = "250px"
+        }
+    }
+
+    else if (currentIndex >= 3 ) {
+        document.querySelector('form').style.height = "540px"   
+    }
+
+    else if(currentIndex == 0)
+    {
+        document.querySelector('form').style.height = "380px"
+    }
+
+    else if(currentIndex == 1)
+    {
+        document.querySelector('form').style.height = "340px"
+
+    }
+
+}
+
+/* This function handles page navigation */
 function switcher() 
 {    
     let currentIndex = 0
@@ -19,17 +52,17 @@ function switcher()
 
             if (index != elements.length - 1) 
             {
-                el.style.display = 'none'    
+                el.classList.add('hide')   
             }
 
             if(index == currentIndex)
             {
-                el.style.display = 'unset'
+                el.classList.remove('hide')
             }
     
         })
-    
     }
+
 
     document.querySelectorAll('.navigation button').forEach((el, index)=>{
         el.addEventListener('click', function (){
@@ -44,6 +77,7 @@ function switcher()
             }
 
             displayHandler(currentIndex)
+            formAjust(currentIndex)
 
         })
     })
