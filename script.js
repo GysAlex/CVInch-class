@@ -108,7 +108,7 @@ function ShowLimitError(message)
 
     setTimeout(() => {
         document.getElementById('limitLanguage').innerText = ""
-    }, 4000);
+    }, 3000);
 }
 
 // Remove Language Function 
