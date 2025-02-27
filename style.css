@@ -1,10 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*
-{
+*{
     font-family: 'Poppins', 'Helvetica';
 }
 
+
+label
+{
+    color: #333;
+    font-weight: 200;
+    font-size: .97em;
+}
+
+*::placeholder
+{
+    color: #1c388e70;
+}
+
+button
+{
+    cursor: pointer;
+}
 
 :root
 {
@@ -42,14 +58,14 @@ body
     border-radius: 50px;
 }
 
-#try::-webkit-scrollbar-thumb {
+#try::-webkit-scrollbar-thumb{
     background-color: orange; /* Couleur de l'indicateur */
     border-radius: 3px; /* Bordures arrondies */
 
 }
 
 /* Style pour la barre de défilement (Firefox) */
-#try {
+#try, #profExperience .content, #education .content{
     scrollbar-width: thin; /* Épaisseur de la barre */
     scrollbar-color: rgb(1, 1, 37) white; /* Couleur de l'indicateur et du fond */
 }
@@ -117,4 +133,33 @@ img
     width: 150px;
     height: 150px;
     border: solid 5px white;
+}
+
+/* Let's put some fancy animations */
+
+#cvForm
+{
+    transition: all ease .4s;
+}
+
+
+#cvForm > div.hide
+{
+    opacity: 0;
+    transition-behavior: allow-discrete;
+    transition-property: display opacity;
+    transition-duration: .3s;
+    display: none;
+}
+
+
+#cvForm > div:has(.navigation)
+{
+    display: unset;
+    opacity: 1;
+
+    @starting-style
+    {
+        opacity:0;
+    }
 }
