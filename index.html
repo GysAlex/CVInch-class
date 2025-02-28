@@ -23,7 +23,7 @@
             <h2 class="text-2xl font-bold mb-4 text-white">Formulaire de CV</h2>
             <form id="cvForm" class="form-container h-[400px] w-full relative bg-white rounded-2xl pb-2 flex flex-col items-end " >
                 
-                <div id="personnalInfo " class="self-start absolute p-5 w-full"  >
+                <div id="personnalInfo" class="self-start absolute p-5 w-full"  >
                     <div class="title text-blue-900 text-xl my-5 font-bold">Informations Personnelles</div>
                     <div class="content flex flex-col gap-4 w-full">
                         <div class="el flex items-center gap-6">
@@ -70,8 +70,8 @@
                     </div>
                     <div class="content flex flex-col gap-4 w-full ">
                         <div class="el flex items-center gap-6">
-                            <label for="phone-number" class="flex gap-1" style="width: 110px;">Compétences <span id="comId">1</span> </label>
-                            <input type="text" pattern="[0-9]{10}" placeholder="développement web" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                            <label for="" class="flex gap-1" style="width: 110px;">Compétences <span id="comId">1</span> </label>
+                            <input type="text" placeholder="développement web" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
                             <button type="button" onclick="removeSkill(event, 'skills')"><i class="fa-solid fa-x text-xl font-bold text-red-600"></i></button>
                         </div>
                     </div>
@@ -92,7 +92,8 @@
                             <label class="flex gap-1" style="width: 110px;">Langue <span class="comId">1</span></label>
                             <input type="text" name="language[]" placeholder="français" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 50%;">
                             <div class="language-group ">
-                                <select name="language_level[]" class="rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                                <div class="tgb"></div>
+                                <select name="language_level" class="rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
                                     <option value="Débutant" class="text-md">Débutant</option>
                                     <option value="Intermédiaire" class="text-md">Intermédiaire</option>
                                     <option value="Avancé" class="text-md">Avancé</option>
@@ -240,13 +241,13 @@
                                 <div class="j-info flex items-center gap-3">
                                     <div class="w-full flex flex-col gap-1">
                                         <label for="" class="flex gap-1" style="width: 110px;"> Diplôme </label>
-                                        <input type="text"  class="your_post p-3 rounded-xl h-10 border border-blue-900 w-full" oninput="syncEdu(event)"  placeholder="BTS en Génie Logiciel" style="outline: transparent;">
+                                        <input type="text"  class="your_diploma p-3 rounded-xl h-10 border border-blue-900 w-full" oninput="syncEdu(event)"  placeholder="BTS en Génie Logiciel" style="outline: transparent;">
                                     </div>
                                 </div>
     
                                 <div class="flex flex-col gap-1">
                                     <label for="" class="" >Etablissement d'obtention</label>
-                                    <input type="text"  class="your_post p-3 rounded-xl h-10 border border-blue-900 w-full"  placeholder="IUT de Bandjour" style="outline: transparent;">
+                                    <input type="text"  class="your_university p-3 rounded-xl h-10 border border-blue-900 w-full"  placeholder="IUT de Bandjour" style="outline: transparent;">
                                 </div>
                             </div>
                             <div class="ind hidden justify-between  p-3 rounded-2xl" style="background-color: skyblue;">
@@ -294,27 +295,9 @@
                             Compétences
                         </div>
                         <div class="info">
-                            <div class="info flex flex-col gap-2">
+                            <div class="info-cont flex flex-col gap-2">
                                 <div class="i-element flex items-center gap-2">
                                     <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Compétence 1</span>
-                                </div>
-                                <div class="i-element flex items-center gap-2">
-                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Competence 2 </span>
-                                </div>
-                                <div class="i-element flex items-center gap-2">
-                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Compétence 3 </span>
-                                </div>
-                                <div class="i-element flex items-center gap-2">
-                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Competence 4 </span>
-                                </div>
-                                <div class="i-element flex items-center gap-2">
-                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Compétence 5</span>
-                                </div>
-                                <div class="i-element flex items-center gap-2">
-                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Competence 6 </span>
-                                </div>
-                                <div class="i-element flex items-center gap-2">
-                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Compétence 7 </span>
                                 </div>
                             </div>
                         </div>
@@ -323,15 +306,9 @@
                         <div class="title  text-white py-1">
                             Langues
                         </div>
-                        <div class="info flex flex-col gap-2">
+                        <div class="info-l flex flex-col gap-2">
                             <div class="i-element flex items-center gap-2">
-                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">langue 1 (niveau)</span>
-                            </div>
-                            <div class="i-element flex items-center gap-2">
-                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">langue 2 (niveau)</span>
-                            </div>
-                            <div class="i-element flex items-center gap-2">
-                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">langue 3 (niveau)</span>
+                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest lg">langue 1 </span> <span class="level text-xs text-white tracking-widest"> (niveau)</span>
                             </div>
                         </div>
                     </div>
@@ -339,15 +316,9 @@
                         <div class="title  text-white py-1">
                             Loisirs
                         </div>
-                        <div class="info flex flex-col gap-2">
+                        <div class="info-h flex flex-col gap-2">
                             <div class="i-element flex items-center gap-2">
                                 <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">loisir 1 </span>
-                            </div>
-                            <div class="i-element flex items-center gap-2">
-                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">loisir 2</span>
-                            </div>
-                            <div class="i-element flex items-center gap-2">
-                                <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">loisir 3</span>
                             </div>
                         </div>
                     </div>
@@ -367,13 +338,13 @@
                 </div>
                 <div class="right-side bg-white flex flex-col">
                     <div class="person-info bg-blue-300 p-4 flex flex-col gap-2" >
-                        <div class="post uppercase text-white tracking-wider">
+                        <div class="post uppercase text-white tracking-wider" id="o-post">
                             Ingénieur réseaux
                         </div>
-                        <div class="name uppercase text-2xl text-blue-900 py-1">
+                        <div class="name uppercase text-2xl text-blue-900 py-1" id="o-name">
                             Votre Nom Complet
                         </div>
-                        <div class="description text-xs mt-2.5">
+                        <div class="description text-xs mt-2.5" id="o-description">
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste doloribus eligendi repudiandae repellendus accusantium reprehenderit modi dignissimos porro in omnis et sit quibusdam rerum id, natus eaque quia. Pariatur, eaque. rerum id, natus eaque quia. Pariatur, eaque.
                         </div>
                     </div>
@@ -389,38 +360,12 @@
                                         Technicien réseau à <span class="special">camtel</span>
                                     </div>
                                     <div class="range flex text-xs font-medium gap-1">
-                                        <div class="start-date">Avril 2023</div>
-                                        <div>à</div>
-                                        <div class="end-date"> Present </div>
+                                        <span class="start-date">Avril 2023</span>
+                                        <span>à</span>
+                                        <span class="end-date"> Mai 2023 </span>
                                     </div>
                                     <div class="desc text-xs font-light">
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus rem dicta totam maxime consequuntur. Vitae assumenda cum placeat dolore ex, corru
-                                    </div>
-                                </div>
-                                <div class="exp-item flex gap-1 flex-col">
-                                    <div class="job-name text-sm">
-                                        Technicien réseau à <span class="special">Gosat</span>
-                                    </div>
-                                    <div class="range flex text-xs font-medium gap-1">
-                                        <div class="start-date">Mars 2022</div>
-                                        <div>à</div>
-                                        <div class="end-date"> Decembre 2022 </div>
-                                    </div>
-                                    <div class="desc text-xs font-light">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus rem dicta totam maxime consequuntur. Vitae assumenda cum placeat dolore ex, corrupti aspernatur alias voluptate quos quod neque blanditiis voluptas! Ad.
-                                    </div>
-                                </div>
-                                <div class="exp-item flex gap-1 flex-col">
-                                    <div class="job-name text-sm">
-                                        Technicien réseau à <span class="special">camtel</span>
-                                    </div>
-                                    <div class="range flex text-xs font-medium gap-1">
-                                        <div class="start-date">Octobre 2021</div>
-                                        <div>à</div>
-                                        <div class="end-date"> Mars 2022 </div>
-                                    </div>
-                                    <div class="desc text-xs font-light">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus 
                                     </div>
                                 </div>
                             </div>
@@ -432,41 +377,15 @@
                             <div class="edu-container flex flex-col gap-3" >
                                 <div class="edu-item flex gap-1 flex-col">
                                     <div class="range flex text-xs font-medium gap-1">
-                                        <div class="start-date">Avril 2023</div>
-                                        <div>à</div>
-                                        <div class="end-date"> Mai 2023 </div>
+                                        <span class="start-date">Avril 2023</span>
+                                        <span>à</span>
+                                        <span class="end-date"> Mai 2023 </span>
                                     </div>
                                     <div class="university-name text-sm font-light">
                                         IUT de Douala
                                     </div>
                                     <div class="desc text-xs  text-blue-900">
                                         Licence Technologique en Sécurité des Réseaux
-                                    </div>
-                                </div>
-                                <div class="edu-item flex gap-1 flex-col">
-                                    <div class="range flex text-xs font-medium gap-1">
-                                        <div class="start-date">Avril 2023</div>
-                                        <div>à</div>
-                                        <div class="end-date"> Mai 2023 </div>
-                                    </div>
-                                    <div class="university-name text-sm font-light">
-                                        IUT de Douala
-                                    </div>
-                                    <div class="desc text-xs text-blue-900">
-                                        DUT en Télécommunications et Réseaux 
-                                    </div>
-                                </div>
-                                <div class="edu-item flex gap-1 flex-col">
-                                    <div class="range flex text-xs font-medium gap-1">
-                                        <div class="start-date">Avril 2023</div>
-                                        <div>à</div>
-                                        <div class="end-date"> Mai 2023 </div>
-                                    </div>
-                                    <div class="university-name text-sm font-light">
-                                        Lycée Bilingue de Douala
-                                    </div>
-                                    <div class="desc text-xs  text-blue-900">
-                                        BACC (Baccalauréat D)
                                     </div>
                                 </div>
                             </div>
@@ -479,5 +398,5 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
+

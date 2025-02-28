@@ -153,6 +153,8 @@ function formHandler(id, addId)
 
             }
     
+            newElement.firstElementChild.nextElementSibling.value = ""
+
             document.querySelector(`#${id} .content`).appendChild(newElement)  
 
             document.querySelector(`#${id} .content`).lastElementChild.scrollIntoView({block: "end", inline: "nearest", behavior: "smooth"})                
@@ -168,8 +170,6 @@ function formHandler(id, addId)
 
             }
 
-
-            console.log(indexer)
         }
 
         else
@@ -180,7 +180,9 @@ function formHandler(id, addId)
     }
 
     document.querySelector(`#${id}`).addEventListener('deleted', (e)=>{
-        indexer--
+        if(indexer >= 0 )
+            indexer--
+
         console.log(indexer)
         reOrder()
         if (id == "skills") 
@@ -195,6 +197,8 @@ function formHandler(id, addId)
 
     document.getElementById(addId).addEventListener('click', ()=>{
         addSkill()
+        console.log(indexer)
+
     })
 }
 
@@ -354,16 +358,26 @@ formHandler("skills", "addSkills")
 function removeSkill(e, id)
 {
     let selection = `#${id} .content > div`
+    let index
 
     if(Array.from(document.querySelectorAll(selection)).length > 1 )
     {
-        e.target.parentElement.parentElement.remove()
+        Array.from(document.querySelectorAll(selection)).forEach((el, indice)=>{
+            if (e.currentTarget.parentElement === el) 
+            {
+                index = indice    
+            }
+        })
+        e.currentTarget.parentElement.remove()
         const sk = new CustomEvent('deleted', {
             detail: {
-                "index" : e
+                "index" : e,
+                "indice": index
             }
         })
         document.querySelector(`#${id}`).dispatchEvent(sk) //This is very intersting...
+        if(id== "skills")
+            document.querySelector('.left-side .l-item .info-cont').dispatchEvent(sk)
     }
 
     else
@@ -416,24 +430,36 @@ switcher()
 
 function removeLanguage(e) {
     let languageItems = document.querySelectorAll('#language .content > div');
-
     if (languageItems.length > 1) {
         e.target.closest('div').remove();
-        reOrderLanguages();
+        const languageDeletedEvent = new CustomEvent('language_deleted');
+
+        document.querySelector("#language").dispatchEvent(languageDeletedEvent);
+
+        Array.from(languageItems).forEach((el, indice)=>{
+            if (e.target.closest('div') === el) 
+            {
+                index = indice    
+            }
+        })
+
+        console.log(e.target.closest('div'), e.currentTarget.closest('div'))
+
+        const sk = new CustomEvent('deleted', {
+            detail: {
+                "indice": index
+            }
+        })
+
+        document.querySelector('.left-side .l-item .info-l').dispatchEvent(sk)
+
     } else {
         ShowLimitError("Trop peu de langues !");
     }
 }
 
 
-    let languageItems = document.querySelectorAll('#language .content > div');
-    if (languageItems.length > 1) {
-        e.target.closest('div').remove();
-        const languageDeletedEvent = new CustomEvent('language_deleted');
-        document.querySelector("#language").dispatchEvent(languageDeletedEvent);
-    } else {
-        ShowLimitError("Trop peu de langues !");
-    }
+
 
 
 function languageFormHandler() {
@@ -454,7 +480,7 @@ function languageFormHandler() {
             newElement.querySelectorAll('input').forEach(input => input.value = "");
             newElement.querySelector('.delete-btn').addEventListener("click", removeLanguage);
             document.querySelector('#language .content').appendChild(newElement);
-            reOrderLanguages();
+            reOrder();
         } else {
             ShowLimitError("Maximum de langues atteint !");
         }
@@ -488,7 +514,26 @@ function removeHobby(e) {
 
     if (hobbyItems.length > 1) {
         e.target.closest('div').remove();
-        reOrderHobbies();
+
+        Array.from(hobbyItems).forEach((el, indice)=>{
+            if (e.target.closest('div') === el) 
+            {
+                index = indice    
+            }
+        })
+
+        const sk = new CustomEvent('deleted', {
+            detail: {
+                "indice": index
+            }
+        })
+
+        document.querySelector('.left-side .l-item .info-h').dispatchEvent(sk)
+
+        document.querySelectorAll("#hobby .content > div").forEach((el, i) => {
+            el.querySelector('.comId').innerText = (i + 1);
+        });
+
     } else {
         ShowLimitError("Trop peu de loisirs !", "limitHobby");
     }
@@ -515,7 +560,7 @@ function addHobby() {
         newElement.querySelectorAll('input').forEach(input => input.value = "");
         newElement.querySelector('.delete-btn').addEventListener("click", removeHobby);
         document.querySelector('#hobby .content').appendChild(newElement);
-        reOrderHobbies();
+        reOrder();
     } else {
         ShowLimitError("Maximum de loisirs atteint !", "limitHobby");
     }
@@ -572,7 +617,412 @@ function referenceFormHandler() {
     });
 }
 
+
+
+function liveUpdatePersonnalInfo() 
+{
+    document.querySelector("#personnalInfo input:first-child").addEventListener('input', function(){
+        document.getElementById('')
+    })
+}
+
+function inputController(path1, path2)
+{
+    //console.log(document.querySelectorAll('.right-side .person-info > div'))
+
+    Array.from(document.querySelectorAll(path1)).map((el) => el.nextElementSibling)
+    .forEach((el, index)=>{
+        el.addEventListener('input', function (){
+            document.querySelectorAll(path2).forEach((ele, i)=>{
+                if (index == i) 
+                {
+                    ele.innerText = el.value.trim()
+                }
+            })
+        })
+    })
+}
+
+function variableInputController()
+{
+    let inputNumber
+    document.getElementById('addSkills').addEventListener('click', function(){
+        inputNumber = document.querySelectorAll('#skills .content .el input').length
+        
+        let ev = new CustomEvent('addInput', {
+            detail:{
+                "size": inputNumber
+            }
+        })
+
+        document.querySelector('.left-side .info .info-cont').dispatchEvent(ev)
+    })
+
+}
+
+
+function updateVarList() 
+{
+    let el = document.querySelector('.left-side .info .info-cont').firstElementChild
+
+    document.querySelector('.left-side .info .info-cont').addEventListener('addInput', function (event) {        
+        let newOne = el.cloneNode(true)
+        newOne.lastElementChild.innerText = ""
+        el.parentElement.appendChild(newOne)
+        inputController('#skills .el label', '.left-side .info-cont .i-element span')
+
+
+    })
+
+    document.querySelector('.left-side .info .info-cont').addEventListener('deleted', function (event) {
+        
+        document.querySelectorAll('.left-side .info .info-cont > div').forEach(function(el, i){
+            if(i == event.detail.indice)
+            {
+                el.remove()
+
+            }
+        })
+        inputController('#skills .el label', '.left-side .info-cont .i-element span')
+
+    })
+
+}
+
+/*function updateVarList(contPath, path1, path2) 
+{
+    let el = document.querySelector(contPath).firstElementChild
+
+    document.querySelector(contPath).addEventListener('addInput', function (event) {        
+        let newOne = el.cloneNode(true)
+        newOne.lastElementChild.innerText = ""
+        el.parentElement.appendChild(newOne)
+        inputController(path1, path2)
+
+    })
+
+    document.querySelector(contPath).addEventListener('deleted', function (event) {
+        
+        document.querySelectorAll(contPath + '> div').forEach(function(el, i){
+            if(i == event.detail.indice)
+            {
+                el.remove()
+            }
+        })
+        inputController(path2, path2)
+
+    })
+}*/
+
+
+function variableInputController2()
+{
+    let inputNumber
+    document.getElementById('addlanguage').addEventListener('click', function(){
+        inputNumber = document.querySelectorAll('#language .content .el').length
+        
+        console.log('Bonjour')
+
+        let ev = new CustomEvent('addInput', {
+            detail:{
+                "size": inputNumber
+            }
+        })
+
+        document.querySelector('.left-side .l-item .info-l').dispatchEvent(ev)
+    })
+
+}
+
+
+function updateVarList2() 
+{
+    let el = document.querySelector('.left-side .l-item .info-l').firstElementChild
+
+    document.querySelector('.left-side .l-item .info-l').addEventListener('addInput', function (event) {
+
+        let newOne = el.cloneNode(true)
+        newOne.firstElementChild.nextElementSibling.innerText = ""
+        el.parentElement.appendChild(newOne)
+
+        document.querySelectorAll('.left-side .l-item .info-l').forEach(function(el){
+            inputController('#language .el label', '.left-side .l-item .info-l .i-element .lg')
+            inputController('#language .el .tgb', '.left-side .l-item .info-l .i-element .level')
+
+        })
+    
+            
+    })
+
+    document.querySelector('.left-side .l-item .info-l').addEventListener('deleted', function (event) {
+        
+        console.log(event.detail.indice)
+        document.querySelectorAll('.left-side .l-item .info-l > div').forEach(function(el, i){
+            if(i == event.detail.indice)
+            {
+                el.remove()
+
+            }
+            inputController('#language .el label', '.left-side .l-item .info-l .i-element .lg')
+            inputController('#language .el .tgb', '.left-side .l-item .info-l .i-element .level')
+
+        })
+
+
+    })
+
+}
+
+variableInputController2()
+updateVarList2()
+
+
+function variableInputController3()
+{
+    let inputNumber
+    document.getElementById('addhobby').addEventListener('click', function(){
+        inputNumber = document.querySelectorAll('#hobby .content .el input').length
+        
+        let ev = new CustomEvent('addInput', {
+            detail:{
+                "size": inputNumber
+            }
+        })
+
+        document.querySelector('.left-side .info-h').dispatchEvent(ev)
+    })
+
+}
+
+
+function updateVarList3() 
+{
+    let el = document.querySelector('.left-side  .info-h').firstElementChild
+
+    document.querySelector('.left-side .info-h').addEventListener('addInput', function (event) {        
+        let newOne = el.cloneNode(true)
+        newOne.firstElementChild.nextElementSibling.innerText = ""
+        el.parentElement.appendChild(newOne)
+        inputController('#hobby .el label', '.left-side .info-h .i-element span')
+
+
+    })
+
+    document.querySelector('.left-side .info-h').addEventListener('deleted', function (event) {
+        
+        console.log(event.detail.indice)
+        document.querySelectorAll('.left-side .info-h > div').forEach(function(el, i){
+            if(i == event.detail.indice)
+            {
+                el.remove()
+
+            }
+        })
+        inputController('#hobby .el label', '.left-side .info-h .i-element span')
+
+    })
+
+}
+
+function updateExperienceList() {
+    let el = document.querySelector('.right-side .exp-container').firstElementChild
+
+    document.getElementById('addExp').addEventListener('click', function () {
+        let newOne = el.cloneNode(true)
+        newOne.querySelectorAll('div').forEach(div => div.innerText = "") 
+
+        document.querySelector('.right-side .exp-container').appendChild(newOne)
+        syncExperienceInputs()
+    })
+
+    document.querySelector('.right-side .exp-container').addEventListener('deleteExp', function (event) {
+        if(event.detail.indice > 0)
+        {
+            document.querySelectorAll('.right-side .exp-container exp-item').forEach(function(el, index){
+                if(index == event.detail.indice)
+                {
+                    el.remove()
+                }
+                
+            })
+            syncExperienceInputs() 
+        }
+    })
+
+    document.querySelectorAll('#profExperience .content .exp-item').forEach((el, index)=>{
+        el.addEventListener('click', function (event){
+            let delE = new CustomEvent('deleteExp', {
+                detail:{
+                    'indice': index
+                }
+            })
+            document.querySelector('.right-side .exp-container').dispatchEvent(delE)
+        })
+    })
+}
+
+function syncExperienceInputs() {
+    document.querySelectorAll('#profExperience .exp-item').forEach((expEl, index) => {
+        const startDateInput = expEl.querySelectorAll('input[type="date"]')[0];
+        const endDateInput = expEl.querySelectorAll('input[type="date"]')[1];
+
+        // Synchroniser le poste et l'entreprise (inchangé)
+        expEl.querySelector('.your_post').addEventListener('input', function () {
+            let jobName = document.querySelectorAll('.right-side .exp-container .exp-item')[index].querySelector('.job-name');
+            jobName.innerHTML = `${this.value} à <span class="special">${expEl.querySelector('input[placeholder="Orange"]').value}</span>`;
+        });
+
+        expEl.querySelector('input[placeholder="Orange"]').addEventListener('input', function () {
+            let jobName = document.querySelectorAll('.right-side .exp-container .exp-item')[index].querySelector('.job-name');
+            jobName.innerHTML = `${expEl.querySelector('.your_post').value} à <span class="special">${this.value}</span>`;
+        });
+
+        startDateInput.addEventListener('input', function () {
+            endDateInput.setAttribute('min', this.value); 
+            if (endDateInput.value && this.value > endDateInput.value) {
+                endDateInput.value = this.value; 
+            }
+
+            document.querySelectorAll('.right-side .exp-container .exp-item')[index].querySelector('.start-date').innerText = this.value;
+            document.querySelectorAll('.right-side .exp-container .exp-item')[index].querySelector('.end-date').innerText = endDateInput.value;
+        });
+
+        endDateInput.addEventListener('input', function () {
+            document.querySelectorAll('.right-side .exp-container .exp-item')[index].querySelector('.end-date').innerText = this.value;
+        });
+
+        // Synchroniser la description (inchangé)
+        expEl.querySelector('textarea[name="description"]').addEventListener('input', function () {
+            document.querySelectorAll('.right-side .exp-container .exp-item')[index].querySelector('.desc').innerText = this.value;
+        });
+    });
+}
+
+// Initialisation
+updateExperienceList();
+syncExperienceInputs();
+
+
+
+function updateEduList()
+{
+    let el = document.querySelector('.right-side .exp-container').firstElementChild
+
+    document.getElementById('addExp').addEventListener('click', function () {
+        let newOne = el.cloneNode(true)
+        newOne.querySelectorAll('div').forEach(div => div.innerText = "") 
+
+        document.querySelector('.right-side .exp-container').appendChild(newOne)
+        syncExperienceInputs()
+    })
+
+    document.querySelector('.right-side .exp-container').addEventListener('click', function (event) {
+        if (event.target.classList.contains('fa-x')) {
+            let expItem = event.target.closest('.exp-item')
+            if (expItem) {
+                expItem.remove()
+                syncExperienceInputs()
+            }
+        }
+    })
+}
+
+
+function syncEduInputs() {
+    document.querySelectorAll('#education .exp-item').forEach((expEl, index) => {
+        const startDateInput = expEl.querySelectorAll('input[type="date"]')[0]
+        const endDateInput = expEl.querySelectorAll('input[type="date"]')[1]
+
+        // Synchroniser le poste et l'entreprise (inchangé)
+        expEl.querySelector('.your_diploma').addEventListener('input', function () {
+            let diploma = document.querySelectorAll('.right-side .edu-container .edu-item')[index].querySelector('.desc')
+            diploma.innerText = `${this.value}`
+        });
+
+        expEl.querySelector('.your_university').addEventListener('input', function () {
+            let diploma = document.querySelectorAll('.right-side .edu-container .edu-item')[index].querySelector('.university-name')
+            diploma.innerText = `${this.value}`
+        });
+
+        // Limiter la date de fin
+        startDateInput.addEventListener('input', function () {
+            endDateInput.setAttribute('min', this.value); // Définir la date de début comme minimum pour la date de fin
+            if (endDateInput.value && this.value > endDateInput.value) {
+                endDateInput.value = this.value // Ajuster la date de fin si elle est antérieure
+            }
+
+            document.querySelectorAll('.right-side .edu-container .edu-item')[index].querySelector('.start-date').innerText = this.value
+            document.querySelectorAll('.right-side .edu-container .edu-item')[index].querySelector('.end-date').innerText = endDateInput.value
+        })
+
+        endDateInput.addEventListener('input', function () {
+            document.querySelectorAll('.right-side .edu-container .edu-item')[index].querySelector('.end-date').innerText = this.value
+        })
+
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+variableInputController3()
+updateVarList3()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+variableInputController()
+updateVarList()
+
+inputController('#personnalInfo .el label', '.right-side .person-info > div')
+inputController('#formContact .el label', '.left-side .info .i-element span')
+inputController('#skills .el label', '.left-side .info-cont .i-element span')
+inputController('#language .el label', '.left-side .l-item .info-l .i-element .lg')
+inputController('#language .el .tgb', '.left-side .l-item .info-l .i-element .level')
+inputController('#hobby .el label', '.left-side .info-h .i-element span')
+
+
+
+
+
+
 languageFormHandler()
 hobbyFormHandler()
 referenceFormHandler() 
 switcher()
+
+
+
