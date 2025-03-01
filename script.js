@@ -288,7 +288,12 @@ function removeExp(e, id)
                 "index" : e
             }
         })
+
         document.querySelector(`#${id}`).dispatchEvent(sk) //This is very intersting...
+
+        //console.log(Array.from(document.querySelectorAll('#profExperience .content .exp-item')).indexOf(e.currentTarget.parentElement.parentElement))
+    
+        console.log(Array.from(document.querySelectorAll('#profExperience .content .exp-item')).indexOf(e.currentTarget.parentElement.parentElement))
     }
 
     else
@@ -829,35 +834,36 @@ function updateExperienceList() {
 
     document.getElementById('addExp').addEventListener('click', function () {
         let newOne = el.cloneNode(true)
-        newOne.querySelectorAll('div').forEach(div => div.innerText = "") 
-
+        //newOne.querySelectorAll('div').forEach(div => div.innerText = "") 
         document.querySelector('.right-side .exp-container').appendChild(newOne)
         syncExperienceInputs()
     })
 
     document.querySelector('.right-side .exp-container').addEventListener('deleteExp', function (event) {
+        console.log("dljfkdj")
         if(event.detail.indice > 0)
         {
             document.querySelectorAll('.right-side .exp-container exp-item').forEach(function(el, index){
                 if(index == event.detail.indice)
                 {
-                    el.remove()
-                }
-                
+                    console.log(el)
+                }                
             })
             syncExperienceInputs() 
         }
     })
 
-    document.querySelectorAll('#profExperience .content .exp-item').forEach((el, index)=>{
+    document.querySelectorAll('#profExperience .content .exp-item .btn-cont button:last-child').forEach((el, index)=>{
         el.addEventListener('click', function (event){
             let delE = new CustomEvent('deleteExp', {
                 detail:{
                     'indice': index
                 }
             })
+            console.log(delE)
             document.querySelector('.right-side .exp-container').dispatchEvent(delE)
         })
+
     })
 }
 
@@ -882,8 +888,8 @@ function syncExperienceInputs() {
             if (endDateInput.value && this.value > endDateInput.value) {
                 endDateInput.value = this.value; 
             }
-
-            document.querySelectorAll('.right-side .exp-container .exp-item')[index].querySelector('.start-date').innerText = this.value;
+            console.log(this.value)
+            document.querySelectorAll('.right-side .exp-container .exp-item')[index].querySelector('.start-date').innerHTML = this.value;
             document.querySelectorAll('.right-side .exp-container .exp-item')[index].querySelector('.end-date').innerText = endDateInput.value;
         });
 

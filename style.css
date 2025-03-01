@@ -77,6 +77,11 @@ body
     backdrop-filter: blur(6px);
 }
 
+#try *
+{
+    user-select: none;
+}
+
 i
 {
     font-size: .9em;
