@@ -18,7 +18,7 @@ function zoom() {
     )
 }
 
-function focusOnLoad()
+/*function focusOnLoad()
 {
     window.addEventListener('load', function() {
         document.getElementById('cv-formation').scrollIntoView({block: "end", inline: "nearest", behavior: "smooth"})
@@ -27,7 +27,7 @@ function focusOnLoad()
         document.getElementById('try').scrollTop = 875
 
     })
-}
+}*/
 
 function twoFingers() 
 {
@@ -78,5 +78,5 @@ function twoFingers()
 
 
 zoom()
-focusOnLoad()
+//focusOnLoad()
 twoFingers()

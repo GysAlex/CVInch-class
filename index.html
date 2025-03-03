@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votre Nom - CV</title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js" integrity="sha512-w3u9q/DeneCSwUDjhiMNibTRh/1i/gScBVp2imNVAMCt6cUHIw6xzhzcPFIaL3Q1EbI2l+nu17q2aLJJLo4ZYg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> -->
      <link rel="stylesheet" href="output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -38,19 +40,23 @@
             <span class="font-medium text-white">CV generator</span>
         </div>
     </div>
-    <div class="container mx-auto flex flex-wrap h-screen">
+    <div class="container mx-auto flex flex-wrap h-screen " id="super">
         <div class=" w-1/2 relative flex items-center justify-center" id="mvk">
 
             <div class="absolute p-6 w-full " id="form-container">
-                <button class="text-2xl mb-4 gap-3 flex items-center justify-center text-white" onclick="toWelcome()">
+                <button class="text-2xl mb-4 gap-3 self-start flex items-center justify-center text-white" onclick="toWelcome()">
                     <i class="fa-solid fa-arrow-left"></i> <span class="text-xl">retour</span>
                 </button>
-                <form id="cvForm" class=" w-4/5 form-container min-w-fit h-[325px] relative bg-white rounded-2xl pb-2 flex flex-col items-end " >
+                <form id="cvForm" class=" w-4/5 form-container min-w-fit h-[375px] relative bg-white rounded-2xl pb-2 flex flex-col items-end " >
                     
                     <div id="personnalInfo" class="self-start absolute p-5 w-full"  >
                         <div class="title text-blue-900 mb-8 font-bold">Informations Personnelles</div>
                         <div class="content flex flex-col gap-4 w-full">
-                            <div class="el flex items-center gap-2s">
+                            <div class="el flex items-center gap-6">
+                                <label for="image">Choisir une image</label>
+                                <input accept="image/*" type="file" name="image" id="image" class="p-3 rounded-xl h-10 border border-blue-900 cursor-pointer" style="outline: transparent; width: 100%;">
+                            </div>
+                            <div class="el flex items-center gap-6">
                                 <label for="post" class="" style="width: 115px;">Poste</label>
                                 <input type="text" name="post"  placeholder="Ingenieur Réseaux" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
                             </div>
@@ -218,7 +224,7 @@
                                     <div class="j-info flex items-center gap-3">
                                         <div class="w-1/2 flex flex-col gap-1">
                                             <label for="exp-job" class="flex gap-1" style="width: 110px;"> Poste </label>
-                                            <input type="text" name="exp-job" class="your_post p-3 rounded-xl h-10 border border-blue-900 w-full" placeholder="Agent commmercial" onclick="syncJob(e)" style="outline: transparent;">
+                                            <input type="text" name="exp-job" class="your_post p-3 rounded-xl h-10 border border-blue-900 w-full" placeholder="Agent commmercial" onclick="syncJob(event)" style="outline: transparent;">
                                         </div>
                                         <div class="w-1/2 flex flex-col gap-1">
                                             <label for="ext-company" class="flex gap-1" style="width: 110px;"> Entreprise </label>
@@ -280,11 +286,11 @@
         
                                     <div class="flex flex-col gap-1 school-name">
                                         <label for="edu-school" class="" >Etablissement d'obtention</label>
-                                        <input type="text" name="edu-school" oninput="syncEdu(e)" class="your_university p-3 rounded-xl h-10 border border-blue-900 w-full"  placeholder="IUT de Bandjour" style="outline: transparent;">
+                                        <input type="text" name="edu-school" oninput="syncEdu(event)" class="your_university p-3 rounded-xl h-10 border border-blue-900 w-full"  placeholder="IUT de Bandjour" style="outline: transparent;">
                                     </div>
                                 </div>
                                 <div class="ind hidden justify-between  p-3 rounded-2xl" style="background-color: skyblue;">
-                                    <span class="flex items-center gap-1"> <span> Diplôme </span> <span >1</span> </span> 
+                                    <span class="flex items-center gap-1"> <span> Diplôme </span> </span> 
                                     <span ></span>
                                     <button type="button" class="flex gap-2 items-center"><i class="fa-solid fa-arrow-down"></i></button>
                                 </div>
@@ -339,7 +345,7 @@
                     </label>
                 </div>
                 <div class="print">
-                    <button onclick="window.print()">
+                    <button onclick="printFunction()">
                         <i class="fa-solid fa-print"></i>
                         <span>imprimer</span>
                     </button>
@@ -349,7 +355,7 @@
                 <div  class="flex flex-row w-[794px] h-[1123px] max-w-[794px] "  id="cv-container">
                     <div class="left-side flex flex-col bg-blue-900" >
                         <div class="left-item w-[50%] mx-auto py-4" id="im-cont">
-                            <img src="image/team1.jpg" alt="" class= "rounded-full">
+                            <img src="image/team1.jpg" alt="" id="cv-img" class= "rounded-full">
                         </div>
                         
                         <div class="l-item p-4 flex gap-4 flex-col" id="cv-contact">
@@ -492,7 +498,12 @@
 
         function openModal() 
         {
-            document.getElementById('searchModal').classList.add('showF')   
+            document.getElementById('searchModal').classList.add('showF')  
+            document.getElementById('cv-formation').scrollIntoView({block: "end", inline: "nearest", behavior: "smooth"})
+            
+            document.getElementById('try').scrollLeft = 875
+            document.getElementById('try').scrollTop = 875
+ 
         }
 
         function goToTheForm()
@@ -504,6 +515,11 @@
                 document.getElementById('cv-container').style.opacity = 1   
             }, 1000);
             
+            document.getElementById('cv-formation').scrollIntoView({block: "end", inline: "nearest", behavior: "smooth"})
+            
+            document.getElementById('try').scrollLeft = 875
+            document.getElementById('try').scrollTop = 875
+
         }
 
         function toWelcome()
@@ -514,6 +530,12 @@
                 document.getElementById('cv-container').style.opacity = 0   
             }, 300);
         }
+
+        function printFunction()
+        {
+            html2pdf().from(document.getElementById('cv-container')).save()
+        }
+        
     </script>
 </body>
 </html>

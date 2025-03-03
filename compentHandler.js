@@ -8,14 +8,14 @@ function personalInfoHandler()
     let cvCont = document.querySelector('#personal-info')
 
     function syncVal() {
-        cont.querySelectorAll('input').forEach(function (el, index1) {
+        cont.querySelectorAll('input[type=text]').forEach(function (el, index1) {
             el.addEventListener('input', function (event) {
                 cvCont.querySelectorAll('span').forEach(function (val, index2) {
                     if (index1 == index2) {
                         val.innerText = event.currentTarget.value.trim()
                     }
                 })
-            })
+            })   
         })
         cont.querySelector('textarea').addEventListener('input', function (event) {
             cvCont.querySelector('.description').innerText = event.currentTarget.value.trim()
@@ -24,9 +24,10 @@ function personalInfoHandler()
 
     form.addEventListener('loadCV', function (event) { //This function handles cvLoading
         let personalInfo = event.detail.user.personalInfo
-
+        document.getElementById('cvForm').style.height = `${375}px`
         personalInfo.forEach((el, index) => {
-            cont.querySelectorAll('input').forEach(function (el2, index2) {
+
+            cont.querySelectorAll('input[type=text]').forEach(function (el2, index2) {
                 if (index == index2)
                     el2.value = el
             })
@@ -96,6 +97,34 @@ function contactHandler()
     
 }
 
+
+function handLingFileUpload()
+{
+
+    /*On the CV */
+    let form = document.getElementById('cvForm')
+    let imgCont = document.getElementById('cv-img')
+
+    const reader = new FileReader()
+
+    form.addEventListener('loadCV', function (event) { //This function handles cvLoading
+        let img = event.detail.user.img
+        imgCont.src = img
+        
+    })
+
+
+    document.getElementById('image').addEventListener('change', function(e){
+        const f = e.currentTarget.files[0]
+        reader.readAsDataURL(f)
+    })
+
+    reader.onload = e => {
+        imgCont.src = e.target.result;
+    }
+
+
+}
 
 
 function skillsHandler() {
@@ -886,7 +915,7 @@ function educationHandler() {
 
                     ele.querySelector('.university-name').innerText = exp[2]
 
-                    ele.querySelector('.desc').innerText = exp[4]
+                    ele.querySelector('.desc').innerText = exp[3]
                 }
             })
         })
@@ -942,6 +971,7 @@ function removeEdu(event) {
 
 
 
+handLingFileUpload()
 personalInfoHandler()
 contactHandler()
 skillsHandler()

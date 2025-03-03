@@ -1,10 +1,12 @@
 let userCount = 0
+let res
 function store()
 {
     document.getElementById('cvForm').addEventListener('submit', function(event){
         event.preventDefault()
         let cv = {
             "id": userCount,
+            "img": res,
             "personalInfo": getPersonnalInfo(),
             "contact": getContacts(),
             "skills": getSkills(),
@@ -17,7 +19,14 @@ function store()
 
         localStorage.setItem(`${getPersonnalInfo()[1]}`, JSON.stringify(cv))
         
+        console.log(getPersonnalInfo())
+
         document.getElementById('cvForm').reset()
+
+        document.querySelector('.navigation button:last-child span').innerText = "Suivant"
+        document.querySelector('.navigation button:last-child').classList.add('bg-blue-900')
+        document.getElementById('cvForm').style.height = `${425}px`
+        document.querySelector('.navigation button:first-child').classList.add('hidden')
 
         let elements = Array.from(document.querySelectorAll('#cvForm > div'))
         elements.forEach((el, index) =>{
@@ -42,7 +51,15 @@ function store()
 
 function getPersonnalInfo() 
 {
-    return Array.from(document.querySelectorAll('#personnalInfo .content label')).map((el) => el.nextElementSibling.value.trim())     
+    let res = []
+    Array.from(document.querySelectorAll('#personnalInfo .content label')).forEach((el, index) => {
+        if (el.nextElementSibling.type != 'file') 
+        {
+            res.push(el.nextElementSibling.value.trim())   
+        }
+    })    
+
+    return res
 }
 
 function getContacts() 
@@ -93,7 +110,26 @@ function getEducation()
 }
 
 
-store()
+function getImage()
+{
+    const reader = new FileReader()
+
+    document.getElementById('image').addEventListener('change', function(e){
+        
+    const f = e.currentTarget.files[0]
+    reader.readAsDataURL(f)
+
+    })
+
+        reader.onload = e => {
+            res = e.target.result;
+        }
+
+
+
+
+}
+
 
 function recover(e)
 {
@@ -121,3 +157,5 @@ function recover(e)
 
 }
 
+store()
+getImage()

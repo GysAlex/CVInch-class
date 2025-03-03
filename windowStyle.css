@@ -1,58 +1,11 @@
 @media print {
-    /* Cacher tous les éléments sauf cv-container */
-    body > *:not(#try) {
+    body > div
+    {
         display: none;
     }
 
-    #try > * {
-        display: none;
-    }
-
-    #cv-container {
-        display: block; /* S'assurer que cv-container est affiché */
-        width: 21cm; /* Exemple : Largeur d'une page A4 */
-        height: 29.7cm; /* Exemple : Hauteur d'une page A4 */
-        margin: 0 auto; /* Centrer sur la page */
-        box-sizing: border-box; /* Assurer que les bordures et le padding sont inclus dans la largeur/hauteur */
-    }
-
-    /* Ajuster les styles internes de cv-container si nécessaire */
-    #cv-container * {
-        font-size: 12pt; /* Ajuster la taille de la police pour l'impression */
-        line-height: 1.2; /* Ajuster l'interligne */
-    }
-
-    /* Supprimer les ombres et les couleurs de fond inutiles pour l'impression */
-    #cv-container * {
-        box-shadow: none !important;
-        background-color: transparent !important;
-        color: black !important;
-    }
-    #cv-container .left-side{
-        background-color: rgb(15, 41, 92) !important;
-    }
-    #cv-container .person-info{
-        background-color: rgb(185, 203, 221) !important;
-    }
-    
-    #cv-container .left-side,
-    #cv-container .right-side {
-        display: block; /* S'assurer que les côtés sont affichés */
-    }
-
-    #cv-container .title {
-        font-size: 14pt; /* Ajuster la taille du titre */
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    #cv-container .info {
-        font-size: 12pt; /* Ajuster la taille du texte */
-        line-height: 1.2;
-    }
-
-    #cv-container img {
-        max-width: 100%; /* S'assurer que les images ne dépassent pas */
-        height: auto;
+    #cv-container
+    {
+        display: block !important;
     }
 }

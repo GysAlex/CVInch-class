@@ -106,10 +106,15 @@ function formAjust(currentIndex)
         document.getElementById('cvForm').style.height = `${475}px`
     }
 
-    if(currentIndex < 2)
+    if(currentIndex == 0)
+    {
+        document.getElementById('cvForm').style.height = `${375}px`
+
+    }
+
+    if(currentIndex == 1)
     {
         document.getElementById('cvForm').style.height = `${325}px`
-
 
     }
 
@@ -218,7 +223,7 @@ function hideEdu(e)
 
 function syncEdu(e) 
 {
-    e.currentTarget.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.innerText = e.currentTarget.value.trim() || "Aucun Diplôme !"
+    e.currentTarget.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.innerText = e.currentTarget.value.trim() || "Aucun Diplôme !"
 }
 
 function syncJob(e) 

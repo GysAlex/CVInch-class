@@ -40,6 +40,7 @@ button
 body
 {
     background-image: var(--gradient);
+    overflow-x: hidden;
 }
 
 #cv
@@ -398,3 +399,56 @@ img
     }
 }
 
+
+@media (max-width: 1024px) 
+{
+    .nav
+    {
+        width: 60%;
+    }
+
+    .toolbar
+    {
+        min-width: unset;
+        flex-wrap: wrap;
+    }
+
+
+    #super
+    {
+
+    }   
+    
+    #mvk
+    {
+        height: 80vh;
+        width: 100vh;
+        display: grid;
+        place-items: center;
+    }
+
+    #mvk > div
+    {
+        width: 95%;
+        transform: translateX(-50%);
+        margin: 0 auto;
+        margin-top: 80px;
+        padding-inline: 16px;
+        margin-bottom: 100px;
+        margin-top: 180px;
+    }
+
+
+    #mvk > div:first-child
+    {
+        margin-top: 180px;
+        display: grid;
+        place-items: center start;
+
+    }
+
+    #try{
+        width: 90%;
+        margin-inline: auto;
+    }
+}

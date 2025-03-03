@@ -2,12 +2,12 @@ function handler()
 {
     userKeys = []
     const cont = document.getElementById('results')
-    function makeItem(name)
+    function makeItem(name, path)
     {
         let div = document.createElement('div')
         div.classList.add('res-item',  'flex',  'flex-row',  'items-center',  'justify-between',  'shrink-0', 'px-1')
         div.innerHTML = `<div class="img-cont rounded-full">
-                            <img src="image/team1.jpg" alt="" srcset="" class="w-full h-full object-fill">
+                            <img src=${path} alt="" srcset="" class="w-full h-full object-fill">
                         </div>
                         <div class="name">
                             ${name}
@@ -37,7 +37,7 @@ function handler()
         let essay = elSetter()
         
         Object.keys(essay).forEach(function(el){
-            makeItem(essay[el].personalInfo[1])
+            makeItem(essay[el].personalInfo[1], essay[el].img)
         })
     }
 
