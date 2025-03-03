@@ -18,6 +18,17 @@ function zoom() {
     )
 }
 
+function focusOnLoad()
+{
+    window.addEventListener('load', function() {
+        document.getElementById('cv-formation').scrollIntoView({block: "end", inline: "nearest", behavior: "smooth"})
+        
+        document.getElementById('try').scrollLeft = 875
+        document.getElementById('try').scrollTop = 875
+
+    })
+}
+
 function twoFingers() 
 {
 
@@ -48,11 +59,18 @@ function twoFingers()
     conteneur.addEventListener('mouseup', () => {
       estEnTrainDeDeplacer = false;
       conteneur.style.cursor = 'grab';
+      setTimeout(() => {
+          conteneur.style.cursor = 'normal';
+
+      }, 3000);
     });
     
     conteneur.addEventListener('mouseleave', () => {
       estEnTrainDeDeplacer = false;
-      conteneur.style.cursor = 'grab';
+      conteneur.style.cursor = 'normal';
+      setTimeout(() => {
+        conteneur.style.cursor = 'normal';
+        }, 3000);
     });
  
 }
@@ -60,4 +78,5 @@ function twoFingers()
 
 
 zoom()
+focusOnLoad()
 twoFingers()

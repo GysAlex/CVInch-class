@@ -6,276 +6,353 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votre Nom - CV</title>
 
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-     <!-- <link rel="stylesheet" href="output.css"> -->
+    <!-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> -->
+     <link rel="stylesheet" href="output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="windowStyle.css">
 </head>
 
 <body>
+    <div id="searchModal" >
+        <div class="content">
+            <div class="searchBar p-2 mt-5 w-4/5 mx-auto flex gap-3 items-center">
+                <i class="fa-solid fa-magnifying-glass text-blue-900" style="font-size: 1.1em;"></i>
+                <input type="search" placeholder="Entre votre nom ou votre identifiant" id="search" class="p-3 grow rounded-xl h-10 border border-blue-900">
+            </div>
+            <div class="results mt-3 flex flex-col gap-3" id="results">
 
-    <div class="container mx-auto flex flex-wrap h-screen">
-
-        <div class="w-1/2  p-8 ">
-            <h2 class="text-2xl font-bold mb-4 text-white">Formulaire de CV</h2>
-            <form id="cvForm" class="form-container h-[400px] w-full relative bg-white rounded-2xl pb-2 flex flex-col items-end " >
-                
-                <div id="personnalInfo" class="self-start absolute p-5 w-full"  >
-                    <div class="title text-blue-900 text-xl my-5 font-bold">Informations Personnelles</div>
-                    <div class="content flex flex-col gap-4 w-full">
-                        <div class="el flex items-center gap-6">
-                            <label for="post" class="" style="width: 115px;">Poste</label>
-                            <input type="text" pattern="" placeholder="Ingenieur Réseaux" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                        </div>
-                        <div class="el flex items-center gap-6" >
-                            <label for="fullname" class="" style="width: 115px;" >Nom complet</label>
-                            <input type="text" placeholder="john doe" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                        </div>
-                        <div class="el flex items-center gap-6">
-                            <label for="address" class="" style="width: 115px;">Description</label>
-                            <textarea name="description" id="" placeholder="parler un peu de vous" class="p-3 rounded-xl border border-blue-900" style="outline: transparent; width: 100%; resize: none;"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="formContact" class="hide p-5 self-start absolute w-full">
-                    <div class="title text-blue-900 text-xl my-5 font-bold">Contacts</div>
-                    <div class="content flex flex-col gap-4 w-full ">
-                        <div class="el flex items-center gap-6">
-                            <label for="phone-number" class="" style="width: 110px;">Téléphone</label>
-                            <input type="text" pattern="[0-9]{10}" placeholder="+(1) 123456789" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                        </div>
-                        <div class="el flex items-center gap-6 " >
-                            <label for="email" class="" style="width: 110px;" >Email</label>
-                            <input type="email" placeholder="john@doe.com" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%; ">
-                        </div>
-                        <div class="el flex items-center gap-6">
-                            <label for="address" class="" style="width: 110px;">Adresse</label>
-                            <input type="text" placeholder="City, Country" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                        </div>
-                    </div>
-                </div>
-
-                <div id="skills" class="self-start p-5 hide absolute w-full">
-                    <div class="title my-5 flex items-center justify-between">
-                        <span class="text-blue-900 text-xl  font-bold">Compétences</span>
-                        <span class="text-xs text-red-600" id="limitSkill"></span>
-                        <button type="button" id="addSkills" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
-                            <span class="text-blue-900 font-medium">+</span>
-                            <span class="text-blue-900 font-medium">ajouter</span>
-                        </button>
-                    </div>
-                    <div class="content flex flex-col gap-4 w-full ">
-                        <div class="el flex items-center gap-6">
-                            <label for="" class="flex gap-1" style="width: 110px;">Compétences <span id="comId">1</span> </label>
-                            <input type="text" placeholder="développement web" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                            <button type="button" onclick="removeSkill(event, 'skills')"><i class="fa-solid fa-x text-xl font-bold text-red-600"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!--language section-->
-                <div id="language" class="self-start p-5 hide w-full absolute">
-                    <div class="title my-5 flex items-center justify-between">
-                        <span class="text-blue-900 text-xl font-bold">langue(s)</span> 
-                        <span class="text-xs text-red-600" id="limitLanguage"></span>
-                        <button type="button" id="addlanguage" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
-                            <span class="text-blue-900 font-medium">+</span>
-                            <span class="text-blue-900 font-medium">ajouter</span>
-                        </button>
-                    </div>
-                    <div class="content flex flex-col gap-4 w-full">
-                        <div class="el flex items-center gap-6">
-                            <label class="flex gap-1" style="width: 110px;">Langue <span class="comId">1</span></label>
-                            <input type="text" name="language[]" placeholder="français" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 50%;">
-                            <div class="language-group ">
-                                <div class="tgb"></div>
-                                <select name="language_level" class="rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                                    <option value="Débutant" class="text-md">Débutant</option>
-                                    <option value="Intermédiaire" class="text-md">Intermédiaire</option>
-                                    <option value="Avancé" class="text-md">Avancé</option>
-                                    <option value="Courant" class="text-md">Courant</option>
-                                </select>
-                            </div>
-                            <button type="button" class="delete-btn">
-                                <i class="fa-solid fa-x text-xl font-bold text-red-600"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!--hobby section-->
-                <div id="hobby" class="self-start p-5 hide w-full absolute">
-                    <div class="title my-5 flex items-center justify-between">
-                        <span class="text-blue-900 text-xl font-bold">Loisirs</span>
-                        <span class="text-xs text-red-600" id="limithobby"></span>
-                        <button type="button" id="addhobby" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
-                            <span class="text-blue-900 font-medium">+</span>
-                            <span class="text-blue-900 font-medium">ajouter</span>
-                        </button>
-                    </div>
-                    <div class="content flex flex-col gap-4 w-full">
-                        <div class="el flex items-center gap-6">
-                            <label class="flex gap-1" style="width: 110px;">Loisir <span class="comId">1</span></label>
-                            <input type="text" name="hobby[]" placeholder="talent" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                            <button type="button" class="delete-btn">
-                                <i class="fa-solid fa-x text-xl font-bold text-red-600"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!--Reffernces section-->
-                <div id="references" class="self-start hide p-5 w-full absolute">
-                    <div class="title my-5 flex items-center justify-between">
-                        <span class="text-blue-900 text-xl font-bold">Reference</span>
-                        <span class="text-xs text-red-600" id="limitreference"></span>
-                        <button type="button" id="addreference" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
-                            <span class="text-blue-900 font-medium">+</span>
-                            <span class="text-blue-900 font-medium">ajouter</span>
-                        </button>
-                    </div>
-                    <div class="content flex flex-col gap-4 w-full">
-                        <div class="el flex items-center gap-6">
-                            <label class="flex gap-1" style="width: 110px;">reference <span class="comId">1</span></label>
-                            <input type="text" placeholder="noms" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                            <input type="text" placeholder="poste" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                            <input type="text" pattern="[0-9]{10}" placeholder="tel(+1) 12.." class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
-                            <button type="button" class="delete-btn">
-                                <i class="fa-solid fa-x text-xl font-bold text-red-600"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="profExperience" class="self-start p-5 absolute hide w-full">
-                    <div class="title my-5 flex items-center justify-between p-2">
-                        <span class="text-blue-900 text-xl  font-bold">Expériences professionnelles</span>
-                        <span class="text-xs text-red-600" id="limitSkill"></span>
-                        <button type="button" id="addExp" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
-                            <span class="text-blue-900 font-medium">+</span>
-                            <span class="text-blue-900 font-medium">ajouter</span>
-                        </button>
-                    </div>
-                    <div class="content flex flex-col gap-4 w-full max-h-[350px] p-2 overflow-y-auto">
-                        <div class="exp-item">
-                            <div class="btn-cont text-right ">
-                                <button type="button" class="rounded-full" onclick="hideExp(event)" style="background-color: skyblue; width: 35px; height: 35px;">
-                                    <i class="fa-solid fa-arrow-up  font-bold text-blue-600 "></i>
-                                </button>
-
-                                <button type="button" class="rounded-full" onclick="removeExp(event, 'profExperience')" style="background-color: rgba(255, 0, 0, 0.438); width: 35px; height: 35px;">
-                                    <i class="fa-solid fa-x  font-bold text-red-600 "></i>
-                                </button>
-                            </div>
-                            <div class="el flex items-stretch flex-col gap-3">
-                                <div class="expCont flex items-center gap-3">
-                                    <div class="w-1/2 flex flex-col gap-1">
-                                        <label for="phone-number" class="flex gap-1" style="width: 110px;"> Date début </label>
-                                        <input type="date"  class="p-3 rounded-xl h-10 border border-blue-900 w-full" style="outline: transparent;">
-                                    </div>
-                                    <div class="w-1/2 flex flex-col gap-1">
-                                        <label for="phone-number" class="flex gap-1" style="width: 110px;"> Date Fin </label>
-                                        <input type="date"  class="p-3 rounded-xl h-10 border border-blue-900 w-full" style="outline: transparent;">
-                                    </div>
-                                </div>
-                                <div class="j-info flex items-center gap-3">
-                                    <div class="w-1/2 flex flex-col gap-1">
-                                        <label for="" class="flex gap-1" style="width: 110px;"> Poste </label>
-                                        <input type="text"  class="your_post p-3 rounded-xl h-10 border border-blue-900 w-full" oninput="syncJob(event)" onload="syncJob(event)" placeholder="Agent commmercial" style="outline: transparent;">
-                                    </div>
-                                    <div class="w-1/2 flex flex-col gap-1">
-                                        <label for="" class="flex gap-1" style="width: 110px;"> Entreprise </label>
-                                        <input type="text"  class="your_post p-3 rounded-xl h-10 border border-blue-900 w-full"  placeholder="Orange" style="outline: transparent;">
-                                    </div>
-                                </div>
-    
-                                <div class="flex flex-col gap-1">
-                                    <label for="address" class="" style="width: 115px;">Description</label>
-                                    <textarea name="description"  placeholder="parler un peu du poste" class="p-3 rounded-xl border border-blue-900" style="outline: transparent; width: 100%; resize: none;"></textarea>
-                                </div>
-                            </div>
-                            <div class="ind hidden justify-between  p-3 rounded-2xl" style="background-color: skyblue;" onclick="showExp(event)">
-                                <span class="flex items-center gap-1"> <span> Expérience </span> <span >1</span> </span> 
-                                <span ></span>
-                                <button type="button" class="flex gap-2 items-center"><i class="fa-solid fa-arrow-down"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="education" class="self-start p-5 hide absolute w-full">
-                    <div class="title my-5 flex items-center justify-between p-2">
-                        <span class="text-blue-900 text-xl  font-bold">Parcours Académique </span>
-                        <span class="text-xs text-red-600" id="limitSkill"></span>
-                        <button type="button" id="addEdu" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
-                            <span class="text-blue-900 font-medium">+</span>
-                            <span class="text-blue-900 font-medium">ajouter</span>
-                        </button>
-                    </div>
-                    <div class="content flex flex-col gap-4 w-full max-h-[300px] p-2 overflow-y-auto">
-                        <div class="exp-item">
-                            <div class="btn-cont text-right ">
-                                <button type="button" class="rounded-full" onclick="hideEdu(event)" style="background-color: skyblue; width: 35px; height: 35px;">
-                                    <i class="fa-solid fa-arrow-up  font-bold text-blue-600 "></i>
-                                </button>
-
-                                <button type="button" class="rounded-full" onclick="removeEdu(event, 'education')" style="background-color: rgba(255, 0, 0, 0.438); width: 35px; height: 35px;">
-                                    <i class="fa-solid fa-x  font-bold text-red-600 "></i>
-                                </button>
-                            </div>
-                            <div class="el flex items-stretch flex-col gap-3">
-                                <div class="expCont flex items-center gap-3">
-                                    <div class="w-1/2 flex flex-col gap-1">
-                                        <label for="" class="flex gap-1" style="width: 110px;"> Date début </label>
-                                        <input type="date"  class="p-3 rounded-xl h-10 border border-blue-900 w-full" style="outline: transparent;">
-                                    </div>
-                                    <div class="w-1/2 flex flex-col gap-1">
-                                        <label for="" class="flex gap-1" style="width: 110px;"> Date Fin </label>
-                                        <input type="date"  class="p-3 rounded-xl h-10 border border-blue-900 w-full" style="outline: transparent;">
-                                    </div>
-                                </div>
-                                <div class="j-info flex items-center gap-3">
-                                    <div class="w-full flex flex-col gap-1">
-                                        <label for="" class="flex gap-1" style="width: 110px;"> Diplôme </label>
-                                        <input type="text"  class="your_diploma p-3 rounded-xl h-10 border border-blue-900 w-full" oninput="syncEdu(event)"  placeholder="BTS en Génie Logiciel" style="outline: transparent;">
-                                    </div>
-                                </div>
-    
-                                <div class="flex flex-col gap-1">
-                                    <label for="" class="" >Etablissement d'obtention</label>
-                                    <input type="text"  class="your_university p-3 rounded-xl h-10 border border-blue-900 w-full"  placeholder="IUT de Bandjour" style="outline: transparent;">
-                                </div>
-                            </div>
-                            <div class="ind hidden justify-between  p-3 rounded-2xl" style="background-color: skyblue;">
-                                <span class="flex items-center gap-1"> <span> Diplôme </span> <span >1</span> </span> 
-                                <span ></span>
-                                <button type="button" class="flex gap-2 items-center"><i class="fa-solid fa-arrow-down"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="navigation flex items-center justify-end absolute bottom-4 gap-4 pe-3" style="width: 80%;">
-                    <button type="button" class="bg-blue-900 p-2 rounded-2xl flex gap-1 items-center text-white" style="width: fit-content;"> <i class="fa-solid fa-arrow-left"></i> previous</button>
-                    <button type="button" class="bg-blue-900 p-2 rounded-2xl mx-4 flex gap-1 items-center text-white" style="width: fit-content;">next  <i class="fa-solid fa-arrow-right"></i> </button>
-                </div>
-    
-            </form>
+            </div>
+            <button class="closeButton" onclick="closeModal()">
+                <i class="fa-solid fa-x"></i>
+            </button>
+        </div>  
+    </div>
+    <div class="nav text-2xl w-2/5 flex items-center justify-between container mx-auto p-6 left-8">
+        <div class="logo">
+            <span class="text-blue-900 font-medium">Web</span><span class="text-white font-bold">Nova</span>
         </div>
+        <div class="purpose text-sm">
+            <span class="font-medium text-white">CV generator</span>
+        </div>
+    </div>
+    <div class="container mx-auto flex flex-wrap h-screen">
+        <div class=" w-1/2 relative flex items-center justify-center" id="mvk">
 
-        <div class="w-1/2 p-5 overflow-y-auto h-full" id="try"  >
-            <div class="ajust h-[400%] w-[400%] flex items-center justify-center">
+            <div class="absolute p-6 w-full " id="form-container">
+                <button class="text-2xl mb-4 gap-3 flex items-center justify-center text-white" onclick="toWelcome()">
+                    <i class="fa-solid fa-arrow-left"></i> <span class="text-xl">retour</span>
+                </button>
+                <form id="cvForm" class=" w-4/5 form-container min-w-fit h-[325px] relative bg-white rounded-2xl pb-2 flex flex-col items-end " >
+                    
+                    <div id="personnalInfo" class="self-start absolute p-5 w-full"  >
+                        <div class="title text-blue-900 mb-8 font-bold">Informations Personnelles</div>
+                        <div class="content flex flex-col gap-4 w-full">
+                            <div class="el flex items-center gap-2s">
+                                <label for="post" class="" style="width: 115px;">Poste</label>
+                                <input type="text" name="post"  placeholder="Ingenieur Réseaux" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                            </div>
+                            <div class="el flex items-center gap-6" >
+                                <label for="fullname" class="" style="width: 115px;" >Nom complet</label>
+                                <input type="text" name="fullname" placeholder="john doe" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                            </div>
+                            <div class="el flex items-center gap-6">
+                                <label for="address" class="" style="width: 115px;">Description</label>
+                                <textarea name="description" id="" placeholder="parler un peu de vous" class="p-3 rounded-xl border border-blue-900" style="outline: transparent; width: 100%; resize: none;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div id="formContact" class="hide p-5 self-start absolute w-full">
+                        <div class="title text-blue-900 mb-8 font-bold">Contacts</div>
+                        <div class="content flex flex-col gap-4 w-full ">
+                            <div class="el flex items-center gap-6">
+                                <label for="phone-number" class="" style="width: 110px;">Téléphone</label>
+                                <input type="text" name="phone-number"  placeholder="+(1) 123456789" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                            </div>
+                            <div class="el flex items-center gap-6 " >
+                                <label for="u-email" class="" style="width: 110px;" >Email</label>
+                                <input type="email" name="u-email"  placeholder="john@doe.com" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%; ">
+                            </div>
+                            <div class="el flex items-center gap-6">
+                                <label for="address" class="" style="width: 110px;">Adresse</label>
+                                <input type="text" name="address" placeholder="City, Country" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div id="skills" class="self-start p-5 hide absolute w-full">
+                        <div class="title mb-8 flex items-center justify-between">
+                            <span class="text-blue-900  font-bold">Compétences</span>
+                            <span class="text-xs text-red-600" id="limitSkill"></span>
+                            <button type="button" id="addSkills" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
+                                <span class="text-blue-900 font-medium">+</span>
+                                <span class="text-blue-900 font-medium">ajouter</span>
+                            </button>
+                        </div>
+                        <div class="content max-h-52 overflow-y-auto flex flex-col gap-4 w-full ">
+                            <div class="el flex items-center gap-6" ind="0">
+                                <label for="form-skill-item" class="flex gap-1" style="width: 110px;">Compétences <span id="comId">1</span> </label>
+                                <input type="text" name="form-skill-item" placeholder="développement web" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                                <button type="button" onclick="removeSkill(event)"><i class="fa-solid fa-x text-xl font-bold text-red-600"></i></button>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!--language section-->
+                    <div id="language" class="self-start p-5 hide w-full absolute">
+                        <div class="title mb-8 flex items-center justify-between">
+                            <span class="text-blue-900 font-bold">langue(s)</span> 
+                            <span class="text-xs text-red-600" id="limitLanguage"></span>
+                            <button type="button" id="addlanguage" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
+                                <span class="text-blue-900 font-medium">+</span>
+                                <span class="text-blue-900 font-medium">ajouter</span>
+                            </button>
+                        </div>
+                        <div class="content max-h-52 overflow-y-auto flex flex-col gap-4 w-full">
+                            <div class="el flex items-center gap-6">
+                                <label class="flex gap-1" style="width: 110px;">Langue <span class="comId">1</span></label>
+                                <input type="text" name="language[]" placeholder="français" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 50%;">
+                                <div class="language-group ">
+                                    <div class="tgb"></div>
+                                    <select name="language_level" class="rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                                        <option value="Débutant" class="text-md">Débutant</option>
+                                        <option value="Intermédiaire" class="text-md">Intermédiaire</option>
+                                        <option value="Avancé" class="text-md">Avancé</option>
+                                        <option value="Courant" class="text-md">Courant</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="delete-btn" onclick="removeLanguage(event)">
+                                    <i class="fa-solid fa-x text-xl font-bold text-red-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!--hobby section-->
+                    <div id="hobby" class="max-h-52 overflow-y-auto self-start p-5 hide w-full absolute">
+                        <div class="title mb-8 flex items-center justify-between">
+                            <span class="text-blue-900 font-bold">Loisirs</span>
+                            <span class="text-xs text-red-600" id="limithobby"></span>
+                            <button type="button" id="addhobby" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
+                                <span class="text-blue-900 font-medium">+</span>
+                                <span class="text-blue-900 font-medium">ajouter</span>
+                            </button>
+                        </div>
+                        <div class="content flex flex-col gap-4 w-full">
+                            <div class="el flex items-center gap-6">
+                                <label class="flex gap-1" style="width: 110px;">Loisir <span class="comId">1</span></label>
+                                <input type="text" name="hobby[]" placeholder="talent" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                                <button type="button" class="delete-btn" onclick="removeHobby(event)">
+                                    <i class="fa-solid fa-x text-xl font-bold text-red-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!--Reffernces section-->
+                    <div id="references" class="self-start hide p-5 w-full absolute">
+                        <div class="title mb-8 flex items-center justify-between">
+                            <span class="text-blue-900 font-bold">Reference</span>
+                            <span class="text-xs text-red-600" id="limitreference"></span>
+                            <button type="button" id="addreference" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
+                                <span class="text-blue-900 font-medium">+</span>
+                                <span class="text-blue-900 font-medium">ajouter</span>
+                            </button>
+                        </div>
+                        <div class="content max-h-52 flex flex-col gap-4 w-full ">
+                            <div class="el flex items-center justify-center gap-6 ">
+                                <div class="he">
+                                    <label for="ref-name" class="flex gap-1" style="width: 110px;">Nom</label>
+                                    <input type="text" name="ref-name" placeholder="noms" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                                </div>
+                                <div class="he">
+                                    <label for="ref-poste" class="flex gap-1" style="width: 110px;">Poste</label>
+                                    <input type="text" name="ref-poste" placeholder="poste" class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                                </div>
+    
+                                <div class="he">
+                                    <label class="flex gap-1" for="ref-number" style="width: 110px;">Contact</label>
+                                    <input type="text" name="ref-number"  placeholder="tel(+1) 12.." class="p-3 rounded-xl h-10 border border-blue-900" style="outline: transparent; width: 100%;">
+                                </div>
+                                <button type="button" class="delete-btn" onclick="removeReference(event)">
+                                    <i class="fa-solid fa-x text-xl font-bold text-red-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div id="profExperience" class="self-start p-5 absolute hide w-full">
+                        <div class="title mb-8 flex items-center justify-between p-2">
+                            <span class="text-blue-900 font-bold">Expériences professionnelles</span>
+                            <span class="text-xs text-red-600" id="limitSkill"></span>
+                            <button type="button" id="addExp" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
+                                <span class="text-blue-900 font-medium">+</span>
+                                <span class="text-blue-900 font-medium">ajouter</span>
+                            </button>
+                        </div>
+                        <div class="content flex flex-col gap-4 w-full max-h-[350px] p-2 overflow-y-auto">
+                            <div class="exp-item">
+                                <div class="btn-cont text-right ">
+                                    <button type="button" class="rounded-full" onclick="hideExp(event)" style="background-color: skyblue; width: 35px; height: 35px;">
+                                        <i class="fa-solid fa-arrow-up  font-bold text-blue-600 "></i>
+                                    </button>
+    
+                                    <button type="button" class="rounded-full" onclick="removeExp(event)" style="background-color: rgba(255, 0, 0, 0.438); width: 35px; height: 35px;">
+                                        <i class="fa-solid fa-x  font-bold text-red-600 "></i>
+                                    </button>
+                                </div>
+                                <div class="el flex items-stretch flex-col gap-3">
+                                    <div class="expCont flex items-center gap-3">
+                                        <div class="w-1/2 flex flex-col gap-1">
+                                            <label for="exp-start-date" class="flex gap-1" style="width: 110px;"> Date début </label>
+                                            <input type="date" name="exp-start-date"  class="p-3 rounded-xl h-10 border border-blue-900 w-full" style="outline: transparent;">
+                                        </div>
+                                        <div class="w-1/2 flex flex-col gap-1">
+                                            <label for="exp-end-date" class="flex gap-1" style="width: 110px;"> Date Fin </label>
+                                            <input type="date" name="exp-end-date" class="p-3 rounded-xl h-10 border border-blue-900 w-full" style="outline: transparent;">
+                                        </div>
+                                    </div>
+                                    <div class="j-info flex items-center gap-3">
+                                        <div class="w-1/2 flex flex-col gap-1">
+                                            <label for="exp-job" class="flex gap-1" style="width: 110px;"> Poste </label>
+                                            <input type="text" name="exp-job" class="your_post p-3 rounded-xl h-10 border border-blue-900 w-full" placeholder="Agent commmercial" onclick="syncJob(e)" style="outline: transparent;">
+                                        </div>
+                                        <div class="w-1/2 flex flex-col gap-1">
+                                            <label for="ext-company" class="flex gap-1" style="width: 110px;"> Entreprise </label>
+                                            <input type="text" name="exp-company" class="your_post p-3 rounded-xl h-10 border border-blue-900 w-full"  placeholder="Orange" style="outline: transparent;">
+                                        </div>
+                                    </div>
+        
+                                    <div class="flex flex-col gap-1">
+                                        <label for="ext-description" class="" style="width: 115px;">Description</label>
+                                        <textarea name="ext-description"  placeholder="parler un peu du poste" class="p-3 rounded-xl border border-blue-900" style="outline: transparent; width: 100%; resize: none;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="ind hidden justify-between  p-3 rounded-2xl" style="background-color: skyblue;" onclick="showExp(event)">
+                                    <span class="flex items-center gap-1"> <span> Expérience </span> <span >1</span> </span> 
+                                    <span ></span>
+                                    <button type="button" class="flex gap-2 items-center"><i class="fa-solid fa-arrow-down"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div id="education" class="self-start p-5 hide absolute w-full">
+                        <div class="title mb-8 flex items-center justify-between p-2">
+                            <span class="text-blue-900 font-bold">Parcours Académique </span>
+                            <span class="text-xs text-red-600" id="limitSkill"></span>
+                            <button type="button" id="addEdu" class="text-sm p-2 bg-blue-300 flex gap-1 rounded-2xl min-w-fit">
+                                <span class="text-blue-900 font-medium">+</span>
+                                <span class="text-blue-900 font-medium">ajouter</span>
+                            </button>
+                        </div>
+                        <div class="content flex flex-col gap-4 w-full max-h-[300px] p-2 overflow-y-auto">
+                            <div class="exp-item">
+                                <div class="btn-cont text-right ">
+                                    <button type="button" class="rounded-full" onclick="hideEdu(event)" style="background-color: skyblue; width: 35px; height: 35px;">
+                                        <i class="fa-solid fa-arrow-up  font-bold text-blue-600 "></i>
+                                    </button>
+    
+                                    <button type="button" class="rounded-full" onclick="removeEdu(event)" style="background-color: rgba(255, 0, 0, 0.438); width: 35px; height: 35px;">
+                                        <i class="fa-solid fa-x  font-bold text-red-600 "></i>
+                                    </button>
+                                </div>
+                                <div class="el flex items-stretch flex-col gap-3">
+                                    <div class="expCont flex items-center gap-3">
+                                        <div class="w-1/2 flex flex-col gap-1">
+                                            <label for="edu-start-date" class="flex gap-1" style="width: 110px;"> Date début </label>
+                                            <input type="date" name="edu-start-date" class="p-3 rounded-xl h-10 border border-blue-900 w-full" style="outline: transparent;">
+                                        </div>
+                                        <div class="w-1/2 flex flex-col gap-1">
+                                            <label for="edu-end-date" class="flex gap-1" style="width: 110px;"> Date Fin </label>
+                                            <input type="date" name="edu-end-date"  class="p-3 rounded-xl h-10 border border-blue-900 w-full" style="outline: transparent;">
+                                        </div>
+                                    </div>
+                                    <div class="j-info flex items-center gap-3">
+                                        <div class="w-full flex flex-col gap-1">
+                                            <label for="diploma" class="flex gap-1" style="width: 110px;"> Diplôme </label>
+                                            <input type="text" name="diploma" class="your_diploma p-3 rounded-xl h-10 border border-blue-900 w-full"  placeholder="BTS en Génie Logiciel" style="outline: transparent;">
+                                        </div>
+                                    </div>
+        
+                                    <div class="flex flex-col gap-1 school-name">
+                                        <label for="edu-school" class="" >Etablissement d'obtention</label>
+                                        <input type="text" name="edu-school" oninput="syncEdu(e)" class="your_university p-3 rounded-xl h-10 border border-blue-900 w-full"  placeholder="IUT de Bandjour" style="outline: transparent;">
+                                    </div>
+                                </div>
+                                <div class="ind hidden justify-between  p-3 rounded-2xl" style="background-color: skyblue;">
+                                    <span class="flex items-center gap-1"> <span> Diplôme </span> <span >1</span> </span> 
+                                    <span ></span>
+                                    <button type="button" class="flex gap-2 items-center"><i class="fa-solid fa-arrow-down"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="navigation flex items-center justify-end absolute bottom-4 gap-4 pe-3" style="width: 80%;">
+                        <button type="button" class="bg-blue-900 hidden p-2 rounded-2xl  gap-1 items-center text-white" style="width: fit-content;"> <i class="fa-solid fa-arrow-left"></i> <span>previous</span></button>
+                        <button type="button" class="bg-blue-900 p-2 rounded-2xl mx-4 flex gap-1 items-center text-white" style="width: fit-content;"> <span> next </span> <i class="fa-solid fa-arrow-right hidden"></i> </button>
+                    </div>
+        
+                </form>
+            </div>
+    
+            <div id="welcomeScreen" class=" w-full absolute n-here">
+
+                <div class="message text-3xl w-5/6 text-white">
+                    Votre outils tout en un de creation de cv <span class="p-1 font-bold text-blue-400"> professionnelles </span> et  <span class="p-1 font-bold text-blue-400">rapide</span> <i class="fa-solid fa-rocket text-blue-400" style="font-size: 1.1em;"></i>
+                </div>
+                <div class="mt-7 grid grid-row-2 grid-cols-1  gap-4 mx-auto ">
+                    <button class="item p-3 bg-(--menu-bg) rounded-2xl flex justify-center items-center gap-2 w-2/3" onclick="goToTheForm()">
+                        <span>
+                            Nouveau CV
+                        </span>
+                        <i class="fa-solid fa-plus">
+    
+                        </i>
+                    </button>
+                    <button class="item p-3 bg-(--menu-bg) rounded-2xl flex justify-center items-center gap-2 w-2/3" onclick="openModal()">
+                        <span class="text-center">
+                            Rechercher les CV existant
+                        </span>
+                        <i class="fa-solid fa-magnifying-glass">
+                            
+                        </i>
+                    </button>
+                </div>
+            </div>
+        </div>
+ 
+        <div class="w-1/2 p-5 overflow-y-auto relative h-full" id="try"  >
+            <div class="toolbar sticky top-0 left-[50%] bg-white z-50" style="transform: translateX(-50%);">
+                <div class="utilily">
+                    <label for="bg-change" class="cursor-pointer">Changer la couleur de fond
+                        <i class="fa-solid fa-palette"></i>
+                        <input type="color" class="w-0 h-0" id="bg-change">
+                    </label>
+                    <label for="bg-text" class="cursor-pointer">Changer la couleur du texte
+                        <i class="fa-solid fa-palette"></i>
+                        <input type="color" class="w-0 h-0" id="bg-text">
+                    </label>
+                </div>
+                <div class="print">
+                    <button onclick="window.print()">
+                        <i class="fa-solid fa-print"></i>
+                        <span>imprimer</span>
+                    </button>
+                </div>
+            </div>
+            <div class="ajust h-[400%] w-[400%] flex items-center justify-center relative z-10">
                 <div  class="flex flex-row w-[794px] h-[1123px] max-w-[794px] "  id="cv-container">
-                    <div class="left-side flex flex-col bg-blue-900 " >
-                        <div class="left-item p-5 py-4">
+                    <div class="left-side flex flex-col bg-blue-900" >
+                        <div class="left-item w-[50%] mx-auto py-4" id="im-cont">
                             <img src="image/team1.jpg" alt="" class= "rounded-full">
                         </div>
                         
-                        <div class="l-item p-4 flex gap-4 flex-col">
+                        <div class="l-item p-4 flex gap-4 flex-col" id="cv-contact">
                             <div class="title text-white py-1">
                                 Contacts
                             </div>
@@ -291,7 +368,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="l-item p-4 flex gap-4 flex-col">
+                        <div class="l-item p-4 flex gap-4 flex-col" id="cv-skills">
                             <div class="title text-white py-1">
                                 Compétences
                             </div>
@@ -303,7 +380,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="l-item p-4 flex gap-4 flex-col">
+                        <div class="l-item p-4 flex gap-4 flex-col" id="cv-languages">
                             <div class="title  text-white py-1">
                                 Langues
                             </div>
@@ -313,7 +390,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="l-item p-4 flex gap-4 flex-col">
+                        <div class="l-item p-4 flex gap-4 flex-col" id="cv-hobby">
                             <div class="title  text-white py-1">
                                 Loisirs
                             </div>
@@ -323,55 +400,58 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="l-item p-4 flex gap-4 flex-col">
+                        <div class="l-item p-4 flex gap-4 flex-col" id="cv-references">
                             <div class="title text-xl text-white py-1">
                                 Références
                             </div>
                             <div class="info flex flex-col gap-2">
-                                <div class="i-element flex items-center gap-2">
-                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Références 1 </span>
-                                </div>
-                                <div class="i-element flex items-center gap-2">
-                                    <i class="fas fas fa-bullseye text-white"></i><span class="text-xs text-white tracking-widest">Références 2</span>
+                                <div class="i-element flex items-center">
+                                    <div class="cf flex flex-col gap-2">
+                                        <span class="text-xs text-white tracking-widest name">Références 1 </span>
+                                        <span class="text-xs text-white tracking-widest poste">DG à ENEO</span>
+                                        <span class="text-xs text-white tracking-widest tel">+(237) 237566456545</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="right-side bg-white flex flex-col">
-                        <div class="person-info bg-blue-300 p-4 flex flex-col gap-2" >
-                            <div class="post uppercase text-white tracking-wider" id="o-post">
+                        <div class="person-info bg-blue-300 p-4 flex flex-col gap-2" id="personal-info">
+                            <span class="post uppercase text-white tracking-wider" id="o-post">
                                 Ingénieur réseaux
-                            </div>
-                            <div class="name uppercase text-2xl text-blue-900 py-1" id="o-name">
+                            </span>
+                            <span class="name uppercase text-2xl text-blue-900 py-1" id="o-name">
                                 Votre Nom Complet
-                            </div>
-                            <div class="description text-xs mt-2.5" id="o-description">
+                            </span>
+                            <span class="description text-xs mt-2.5" id="o-description">
                                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste doloribus eligendi repudiandae repellendus accusantium reprehenderit modi dignissimos porro in omnis et sit quibusdam rerum id, natus eaque quia. Pariatur, eaque. rerum id, natus eaque quia. Pariatur, eaque.
-                            </div>
+                            </span>
                         </div>
         
                         <div class="other p-4">
-                            <div class="flex flex-col gap-2" id="experiences">
+                            <div class="flex flex-col gap-2" id="cv-experiences">
                                 <div class="title text font-medium text-blue-900 py-1">
                                     Expériences professionnelles
                                 </div>
                                 <div class="exp-container flex flex-col gap-3">
                                     <div class="exp-item flex gap-1 flex-col">
                                         <div class="job-name text-sm">
-                                            Votre poste à <span class="special">l'entreprise</span>
+                                            <span>Votre poste</span> à <span class="special">l'entreprise</span>
                                         </div>
                                         <div class="range flex text-xs font-medium gap-1">
                                             <span class="start-date">Avril 2023</span>
-                                            <span>à</span>
+                                            <div>à</div>
                                             <span class="end-date"> Mai 2023 </span>
                                         </div>
                                         <div class="desc text-xs font-light">
-                                            Entrer une brève description de votre emploi Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi consectetur
+                                            <span>
+                                                Entrer une brève description de votre emploi Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi consectetur
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="formation" class="mt-4 flex flex-col gap-2">
+                            <div id="cv-formation" class="mt-4 flex flex-col gap-2">
                                 <div class="title text font-medium text-blue-900 py-1 ">
                                     Formation Académique
                                 </div>
@@ -379,15 +459,15 @@
                                     <div class="edu-item flex gap-1 flex-col">
                                         <div class="range flex text-xs font-medium gap-1">
                                             <span class="start-date">Avril 2023</span>
-                                            <span>à</span>
+                                            <div>à</div>
                                             <span class="end-date"> Mai 2023 </span>
                                         </div>
-                                        <div class="university-name text-sm font-light">
+                                        <span class="university-name text-sm font-light">
                                             IUT de Douala
-                                        </div>
-                                        <div class="desc text-xs  text-blue-900">
+                                        </span>
+                                        <span class="desc text-xs  text-blue-900">
                                             Licence Technologique en Sécurité des Réseaux
-                                        </div>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -398,8 +478,43 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="other.js"></script>
+    <script src="compentHandler.js"></script>
+    <script src="storeLocaly.js"></script>
     <script src="zoomEffect.js"></script>
+    <script src="colorModifier.js"></script>
+    <script src="search.js"></script>
+    <script>
+        function closeModal() 
+        {
+            document.getElementById('searchModal').classList.remove('showF')    
+        }
+
+        function openModal() 
+        {
+            document.getElementById('searchModal').classList.add('showF')   
+        }
+
+        function goToTheForm()
+        {
+            document.getElementById('welcomeScreen').classList.remove('n-here')
+            document.getElementById('form-container').classList.add('n-here')
+
+            setTimeout(() => {
+                document.getElementById('cv-container').style.opacity = 1   
+            }, 1000);
+            
+        }
+
+        function toWelcome()
+        {
+            document.getElementById('welcomeScreen').classList.add('n-here')
+            document.getElementById('form-container').classList.remove('n-here')
+            setTimeout(() => {
+                document.getElementById('cv-container').style.opacity = 0   
+            }, 300);
+        }
+    </script>
 </body>
 </html>
 

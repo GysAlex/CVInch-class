@@ -428,9 +428,10 @@ function syncEdu(e)
 {
     e.currentTarget.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.innerText = e.currentTarget.value.trim() || "Aucun Diplôme !"
 }
-/*To handle education*/
 
-switcher()
+
+
+/*To handle education*/
 
 
 function removeLanguage(e) {
