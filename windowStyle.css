@@ -1,0 +1,11 @@
+@media print {
+    body > div
+    {
+        display: none;
+    }
+
+    #cv-container
+    {
+        display: block !important;
+    }
+}
