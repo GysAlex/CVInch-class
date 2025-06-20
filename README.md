@@ -6,7 +6,8 @@ Il s'agit d'un application qui permet la création rapide de cv performants
 
 ## Techonologies utilisées
 
-- JavaScript, TailwindCSS
+- JavaScript
+- TailwindCSS
 
 
 ## Features
